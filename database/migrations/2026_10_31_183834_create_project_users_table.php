@@ -12,18 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         // tabla de unión entre proyectos y usuarios
-        Schema::create('project_users', function (Blueprint $table) {
+        Schema::create('project_user', function (Blueprint $table) {
 
             // id del usuario
-            $table->foreignId('users')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
             // id del proyecto
-            $table->foreignId('projects')->constrained()->cascadeOnDelete();
+            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
 
-            // Cuando el usuario se esté apuntando a un proyecto, a través de su propio id es como determinas qué rol tiene.
             $table->string('role');
 
-            $table->integer('contribution_hours');
+            // un usuario no puede estar dos veces en el mismo proyecto
+            $table->unique(['user_id', 'project_id']); 
+
+            $table->integer('contribution_hours')->default(0);
+
+            $table->timestamps();
 
 
         });
@@ -34,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('project_users');
+        Schema::dropIfExists('project_user');
     }
 };

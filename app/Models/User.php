@@ -7,8 +7,11 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
@@ -25,8 +28,20 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
+
+    // Un usuario tiene muchos proyectos. Con esta función obtenemos los datos de alguno de los proyectos que tiene el usuario.
+     public function ownedProjects(): HasMany{
+        return $this->hasMany(Project::class);
+    }
+
+    public function projects(): BelongsToMany{
+        return $this->belongsToMany(Project::class)
+
+            ->withPivot('role', 'contribution_hours')
+            ->withTimestamps();
+    }
+
 }
