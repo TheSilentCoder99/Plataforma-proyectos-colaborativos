@@ -25,6 +25,8 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+
+    // Con esta función lo que haces es que, cada vez que se cree un usuario y éste cree su contraseña, ésta se hashea
     protected function casts(): array
     {
         return [
