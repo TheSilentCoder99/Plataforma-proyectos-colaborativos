@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 
-// Los Seeders (o Database Seeders) son clases de PHP que sirven única y exclusivamente para llenar tu base de datos con datos de prueba o iniciales. Esta clase es como el orquestador, desde aquí se ejecuta la lógica de cada seeder individual de cada modelo. O sea, en cada archivo declaras lógica de cómo se generan los datos. Aquí simplemente se generan y ya.
+// Los Seeders (o Database Seeders) son clases de PHP que sirven única y exclusivamente para llenar tu base de datos con datos de prueba o iniciales. Esta clase es como el orquestador, desde aquí se ejecuta la lógica de cada seeder individual de cada modelo. El único trabajo de esta clase es organizar el orden en el que se van a ejecutar los seeders de cada modelo.
+
+// En cada seeder(que se compone de, por ejemplo del modelo project, tendrías -> projectFactory + projectSeeder) declararía el cómo se hacen los datos (factory) y la cantidad (seeder).
 
 use App\Models\User;
 use App\Models\Project;
