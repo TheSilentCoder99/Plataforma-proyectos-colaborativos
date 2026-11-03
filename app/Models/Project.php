@@ -5,10 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Project extends Model
 {
-    
+     /** @use HasFactory<UserFactory> */
+    use HasFactory, Notifiable;
+
     // modelo de datos de la tabla proyectos
 
     // El array fillable me indica todas las propiedades de la tabla que se pueden asignar. O sea, propiedades que pueden recibir su asignación desde, por ejemplo, la entrada de un formulario.
@@ -21,9 +26,10 @@ class Project extends Model
 
     // Definición de una relación (ejemplo: un proyecto pertenece a un usuario). Con esta función obtenemos datos del usuario dueño de este proyecto.
     public function owner(): BelongsTo {
+        // Laravel siempre intenta adivinar la columna usando el nombre del método más _id
+
         // Le estás diciendo a Laravel: "Oye, quiero que este método se llame owner en PHP, pero no busques owner_id en MySQL; la clave foránea real es user_id".
 
-        // Laravel siempre intenta adivinar la columna usando el nombre del método más _id
         return $this->belongsTo(User::class,'user_id');
     }
     
@@ -32,6 +38,7 @@ class Project extends Model
         public function users(): BelongsToMany {
         return $this->belongsToMany(User::class)
 
+            // withPivot + (nombre de columnas) me trae las columnas de la tabla pivote que yo le indique ya que, por defecto, solamente trae las claves foráneas de las tablas que la conforman
             ->withPivot('role', 'contribution_hours')
             ->withTimestamps();
     }

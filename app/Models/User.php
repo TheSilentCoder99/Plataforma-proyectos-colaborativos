@@ -32,7 +32,7 @@ class User extends Authenticatable
         ];
     }
 
-    // Un usuario tiene muchos proyectos. Con esta función obtenemos los datos de alguno de los proyectos que tiene el usuario.
+    // Un usuario tiene muchos proyectos. Con esta función obtenemos los datos de alguno de los proyectos que tiene el usuario. Se puede leer como "this user has many projects" "this user belongs to many projects". Solo clarificar mentalmente la forma de declararlo con código
      public function ownedProjects(): HasMany{
         return $this->hasMany(Project::class);
     }
