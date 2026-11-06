@@ -6,6 +6,6 @@
     <title>Listado</title>
 </head>
 <body>
-    <h1>Hola, aquí van tu vista de todos los usuarios</h1>
+    <h1>Hola, aquí va tu vista de todos los usuarios</h1>
 </body>
 </html>

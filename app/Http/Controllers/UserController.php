@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
+// Revisar Feature Tests (Pruebas de característica).
+
 class UserController extends Controller
 {
     protected $user;
@@ -62,6 +64,7 @@ class UserController extends Controller
      * Muestra toda la información de un usuario específico mediante su id
      */
     public function show(User $user){
+        
         // Mediante el Route Model Binding, laravel "sabe" que estoy buscando un usuario, entonces hace automáticamente todo lo que está comentado aquí abajo pero de forma oculta:
         /*$UsuarioExiste = User::findOrFail($id); 
         ['user' => $UsuarioExiste]
