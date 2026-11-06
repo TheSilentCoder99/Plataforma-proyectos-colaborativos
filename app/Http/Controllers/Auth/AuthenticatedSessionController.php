@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('views_project.index_project', absolute: false));
+        return redirect()->intended(route('/projects', absolute: false));
     }
 
     /**

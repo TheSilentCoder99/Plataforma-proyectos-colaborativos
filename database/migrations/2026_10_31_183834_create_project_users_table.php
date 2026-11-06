@@ -20,7 +20,7 @@ return new class extends Migration
             // id del proyecto
             $table->foreignId('project_id')->constrained()->cascadeOnDelete();
 
-            // Más adelante podrías acotar esto en el frontend, mediante un select da solamente 3 opciones
+            // Más adelante podría acotar esto en el frontend, mediante un select da solamente 3 opciones
             $table->string('role');
 
             // un usuario no puede estar dos veces en el mismo proyecto

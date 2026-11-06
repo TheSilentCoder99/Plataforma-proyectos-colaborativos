@@ -56,7 +56,7 @@ class UserController extends Controller
         $user = User::create($validados);
 
         // Redirijo a la lista de todos los usuarios con un mensaje
-        return redirect()->route('views_user.users.index')->with('success', 'Usuario creado correctamente.');
+        return redirect()->route('views_user.index_usuarios')->with('success', 'Usuario creado correctamente.');
     }
 
     /**
@@ -97,7 +97,7 @@ class UserController extends Controller
     ]);
 
     // 3. Redirigimos a la vista de detalle o listado
-    return redirect()->route('views_user.users.show', $user)->with('success', 'Usuario actualizado correctamente.');
+    return redirect()->route('views_user.detalle_usuario', $user)->with('success', 'Usuario actualizado correctamente.');
 }
 
 
@@ -108,7 +108,7 @@ class UserController extends Controller
         
             $user->delete();
 
-    return redirect()->route('views_user.users.index')->with('success', 'Usuario eliminado correctamente.');
+    return redirect()->route('views_user.index_usuarios')->with('success', 'Usuario eliminado correctamente.');
 
     }
 }
