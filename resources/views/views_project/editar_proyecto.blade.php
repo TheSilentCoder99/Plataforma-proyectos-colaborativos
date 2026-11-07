@@ -1,11 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar proyecto</title>
+    <title>Editar Proyecto</title>
+    <link rel="stylesheet" href="{{ asset('css/editar_proyecto.css') }}">
 </head>
 <body>
-    <h1>Hola, aquí vas a editar un proyecto concreto</h1>
+
+    <div class="form-container">
+        <h1>Editar Proyecto</h1>
+
+        <!-- Mensaje de éxito -->
+        @if (session('success'))
+            <div class="alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <!-- Errores de validación -->
+        @if ($errors->any())
+            <div class="alert-error">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <!-- Formulario de edición -->
+        <form action="{{ route('projects.update', $esteProyecto->id) }}" method="POST" class="project-form">
+            @csrf
+            @method('PATCH')
+
+            <div class="form-group">
+                <label for="title">Título:</label>
+                <input 
+                    type="text" 
+                    id="title" 
+                    name="title" 
+                    value="{{ old('title', $esteProyecto->title) }}" 
+                    required 
+                    maxlength="255"
+                    placeholder="Ingresa el título del proyecto">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Descripción:</label>
+                <textarea 
+                    id="description" 
+                    name="description" 
+                    rows="5" 
+                    required
+                    placeholder="Describe el proyecto">{{ old('description', $esteProyecto->description) }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="due_date">Fecha de Entrega:</label>
+                <input 
+                    type="date" 
+                    id="due_date" 
+                    name="due_date" 
+                    value="{{ old('due_date', $esteProyecto->due_date) }}" 
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="status">Estado:</label>
+                <select id="status" name="status" required>
+                    <option value="pendiente"   {{ old('status', $esteProyecto->status) == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
+                    <option value="en progreso" {{ old('status', $esteProyecto->status) == 'en progreso' ? 'selected' : '' }}>En Progreso</option>
+                    <option value="completado"  {{ old('status', $esteProyecto->status) == 'completado' ? 'selected' : '' }}>Completado</option>
+                    <option value="cancelado"   {{ old('status', $esteProyecto->status) == 'cancelado' ? 'selected' : '' }}>Cancelado</option>
+                </select>
+            </div>
+
+            <div class="actions-container">
+                <button type="submit" class="btn-submit">Guardar Cambios</button>
+            </div>
+        </form>
+
+        <div class="back-link">
+            <a href="{{ route('dashboard') }}">Volver al listado</a>
+        </div>
+    </div>
+
 </body>
 </html>

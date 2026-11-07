@@ -18,6 +18,7 @@ class Project extends Model
 
     // El array fillable me indica todas las propiedades de la tabla que se pueden asignar. O sea, propiedades que pueden recibir su asignación desde, por ejemplo, la entrada de un formulario.
     protected $fillable = [
+        'user_id',
         'title',
         'description',
         'due_date',

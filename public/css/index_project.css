@@ -1,0 +1,272 @@
+/* ============================================
+   Paleta:
+   - Primario:    #252EB0 (azul oscuro)
+   - Secundario:  #527CFF (azul claro)
+   - Neutro:      #FFFFFF (blanco)
+   ============================================ */
+
+/* -------- Contenedor general -------- */
+.lista-proyectos {
+    background: linear-gradient(135deg, #9a9fe6 0%, #527CFF 100%);
+    min-height: calc(100vh - 65px);
+    padding: 40px 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.lista-proyectos__container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* -------- Header (slot) -------- */
+.lista-proyectos__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.lista-proyectos__title {
+    color: #252EB0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+/* -------- Botón crear -------- */
+.btn-crear {
+    background-color: #252EB0;
+    color: #FFFFFF;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: 0.4px;
+    border: 2px solid #252EB0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37, 46, 176, 0.3);
+    display: inline-block;
+}
+
+.btn-crear:hover {
+    background-color: #527CFF;
+    border-color: #527CFF;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(82, 124, 255, 0.5);
+}
+
+.btn-crear:active {
+    transform: translateY(0);
+}
+
+/* -------- Alerta de éxito -------- */
+.alert-success {
+    background-color: #e6f0ff;
+    color: #252EB0;
+    border-left: 4px solid #527CFF;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 8px rgba(37, 46, 176, 0.1);
+}
+
+/* -------- Tarjeta / contenedor tabla -------- */
+.lista-proyectos__card {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(37, 46, 176, 0.35);
+    border-top: 6px solid #252EB0;
+    overflow: hidden;
+}
+
+.lista-proyectos__card-body {
+    padding: 0;
+    overflow-x: auto;
+}
+
+/* -------- Tabla -------- */
+.tabla-proyectos {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.tabla-proyectos thead {
+    background-color: #f4f6ff;
+}
+
+.tabla-proyectos thead th {
+    color: #252EB0;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    padding: 14px 24px;
+    text-align: left;
+    border-bottom: 2px solid #e0e4ff;
+}
+
+.tabla-proyectos thead th.text-right {
+    text-align: right;
+}
+
+.tabla-proyectos tbody tr {
+    border-bottom: 1px solid #eef1ff;
+    transition: background-color 0.2s ease;
+}
+
+.tabla-proyectos tbody tr:hover {
+    background-color: #f8f9ff;
+}
+
+.tabla-proyectos tbody td {
+    padding: 16px 24px;
+    color: #333;
+    vertical-align: middle;
+}
+
+.cell-titulo {
+    font-weight: 600;
+    color: #252EB0;
+    white-space: nowrap;
+}
+
+.cell-fecha {
+    color: #6b7094;
+    white-space: nowrap;
+}
+
+/* -------- Badge de estado -------- */
+.status-badge {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    background-color: #527CFF;
+    text-transform: capitalize;
+    box-shadow: 0 2px 6px rgba(82, 124, 255, 0.3);
+}
+
+.status-badge.status-pendiente,
+.status-badge.status-pending {
+    background-color: #527CFF;
+}
+
+.status-badge.status-en-progreso,
+.status-badge.status-in-progress {
+    background-color: #252EB0;
+}
+
+.status-badge.status-completado,
+.status-badge.status-completed,
+.status-badge.status-finalizado {
+    background-color: #1f7a4d;
+}
+
+.status-badge.status-cancelado,
+.status-badge.status-cancelled {
+    background-color: #7a7fbf;
+}
+
+/* -------- Columna acciones -------- */
+.cell-acciones {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.link-accion {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    padding: 4px 6px;
+    transition: color 0.2s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.link-ver {
+    color: #527CFF;
+    margin-right: 10px;
+}
+
+.link-ver:hover {
+    color: #252EB0;
+    text-decoration: underline;
+}
+
+.link-editar {
+    color: #c98a05;
+    margin-right: 10px;
+}
+
+.link-editar:hover {
+    color: #8a5f00;
+    text-decoration: underline;
+}
+
+.link-borrar {
+    color: #b02525;
+}
+
+.link-borrar:hover {
+    color: #7a1010;
+    text-decoration: underline;
+}
+
+.form-inline {
+    display: inline;
+}
+
+/* -------- Fila vacía -------- */
+.empty-row {
+    text-align: center;
+    color: #6b7094;
+    padding: 40px 24px !important;
+    font-style: italic;
+    font-size: 1rem;
+}
+
+/* -------- Responsive -------- */
+@media (max-width: 768px) {
+    .lista-proyectos {
+        padding: 25px 12px;
+    }
+
+    .lista-proyectos__header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .btn-crear {
+        width: 100%;
+        text-align: center;
+    }
+
+    .tabla-proyectos thead th,
+    .tabla-proyectos tbody td {
+        padding: 12px 14px;
+        font-size: 0.88rem;
+    }
+
+    .link-accion {
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .link-ver,
+    .link-editar {
+        margin-right: 0;
+    }
+}
