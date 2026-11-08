@@ -64,8 +64,8 @@ class UserController extends Controller
         // crea el usuario directamente sin hashear su contraseña porque eso ya se hace directamente en el modelo usuario cada vez que se cree un nuevo usuario y se le asigne una contraseña. Se hace en la función casts
         $user = User::create($validados);
 
-        // Redirijo a la lista de todos los usuarios con un mensaje
-        return redirect()->route('views_user.index_usuarios')->with('success', 'Usuario creado correctamente.');
+        // Redirijo a la RUTA de todos los usuarios con un mensaje
+        return redirect()->route('users.index')->with('success', 'Usuario creado correctamente.');
     }
 
     /**

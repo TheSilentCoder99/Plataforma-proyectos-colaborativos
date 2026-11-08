@@ -10,6 +10,7 @@
     box-sizing: border-box;
 }
 
+
 body {
     margin: 0;
     background: linear-gradient(135deg, #9a9fe6 0%, #527CFF 100%);
@@ -256,3 +257,4 @@ body {
         white-space: normal;
     }
 }
+

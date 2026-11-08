@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
+
         <div class="header-bar">
-            <h2 class="header-title">
-                {{ __('Lista de Proyectos') }}
-            </h2>
+        
             <a href="{{ route('projects.create') }}" class="btn-crear">
                 Crear Proyecto
             </a>
         </div>
+        
     </x-slot>
 
     <!-- Enlace al CSS externo -->

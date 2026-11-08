@@ -6,6 +6,8 @@
     <title>Listado de Usuarios</title>
     <link rel="stylesheet" href="{{ asset('css/index_usuarios.css') }}">
 </head>
+
+
 <body>
     <div class="form-container" style="max-width: 900px;"> <!-- Ampliado para que quepa la tabla -->
         <h1>Listado de usuarios</h1>

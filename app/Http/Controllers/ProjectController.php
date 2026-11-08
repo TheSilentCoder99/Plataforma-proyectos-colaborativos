@@ -80,7 +80,7 @@ class ProjectController extends Controller
     public function show(string $id)
     {
 
-        $esteProyecto = $this->project->find($id);
+        $esteProyecto = $this->project->with('users')->find($id);
 
         return view('views_project.detalle_proyecto', compact('esteProyecto'));
 
@@ -91,7 +91,7 @@ class ProjectController extends Controller
      */
     public function edit(string $id)
     {
-        $esteProyecto = $this->project->find($id);
+        $esteProyecto = $this->project->findOrFail($id);
 
         return view('views_project.editar_proyecto', compact('esteProyecto'));
     }

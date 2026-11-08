@@ -1,9 +1,4 @@
 /* ============================================
-   Paleta:
-   - Primario:    #252EB0 (azul oscuro)
-   - Secundario:  #527CFF (azul claro)
-   - Neutro:      #FFFFFF (blanco)
-   ============================================ */
 
 /* -------- Contenedor general -------- */
 .lista-proyectos {
@@ -270,3 +265,4 @@
         margin-right: 0;
     }
 }
+

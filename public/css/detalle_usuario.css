@@ -1,0 +1,246 @@
+/* ============================================
+   Paleta:
+   - Primario:    #252EB0 (azul oscuro)
+   - Secundario:  #527CFF (azul claro)
+   - Neutro:      #FFFFFF (blanco)
+   ============================================ */
+
+/* -------- Reset básico -------- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #9a9fe6 0%, #527CFF 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* -------- Contenedor general -------- */
+.form-container {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(37, 46, 176, 0.35);
+    border-top: 6px solid #252EB0;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 28px;
+}
+
+/* -------- Enlace "Ver listado de usuarios" (botón secundario/volver) -------- */
+.form-container > a:first-of-type {
+    display: inline-block;
+    background-color: #FFFFFF;
+    color: #252EB0;
+    padding: 9px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    letter-spacing: 0.4px;
+    border: 2px solid #252EB0;
+    transition: all 0.3s ease;
+    margin-bottom: 22px;
+}
+
+.form-container > a:first-of-type:hover {
+    background-color: #252EB0;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37, 46, 176, 0.4);
+}
+
+.form-container > a:first-of-type:active {
+    transform: translateY(0);
+}
+
+/* -------- Título (nombre del usuario) -------- */
+.form-container h1 {
+    color: #252EB0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin: 0 0 10px 0;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #e0e4ff;
+}
+
+/* -------- Enlace Editar -------- */
+.form-container > a[href*="edit"] {
+    display: inline-block;
+    color: #c98a05;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    padding: 4px 6px;
+    margin-right: 10px;
+    transition: color 0.2s ease;
+}
+
+.form-container > a[href*="edit"]:hover {
+    color: #8a5f00;
+    text-decoration: underline;
+}
+
+/* -------- Celda / botón Borrar usuario -------- */
+.cell-acciones {
+    display: inline-block;
+    text-align: right;
+}
+
+.cell-acciones form {
+    display: inline;
+}
+
+.cell-acciones form button {
+    color: #b02525;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 4px 6px;
+    transition: color 0.2s ease;
+}
+
+.cell-acciones form button:hover {
+    color: #7a1010;
+    text-decoration: underline;
+}
+
+/* -------- Email del usuario -------- */
+.form-container > div {
+    color: #6b7094;
+    font-size: 0.98rem;
+    margin: 14px 0 22px 0;
+    padding: 12px 16px;
+    background-color: #f4f6ff;
+    border-left: 4px solid #527CFF;
+    border-radius: 8px;
+    word-break: break-all;
+}
+
+/* -------- Alerta de éxito -------- */
+.alert-success {
+    background-color: #e6f0ff;
+    color: #252EB0;
+    border-left: 4px solid #527CFF;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 8px rgba(37, 46, 176, 0.1);
+}
+
+/* -------- Tabla de proyectos -------- */
+.tabla-proyectos {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(37, 46, 176, 0.08);
+}
+
+.tabla-proyectos tbody tr {
+    border-bottom: 1px solid #eef1ff;
+    transition: background-color 0.2s ease;
+}
+
+.tabla-proyectos tbody tr:last-child {
+    border-bottom: none;
+}
+
+.tabla-proyectos tbody tr:hover {
+    background-color: #f8f9ff;
+}
+
+.tabla-proyectos tbody td {
+    padding: 16px 20px;
+    color: #333;
+    vertical-align: middle;
+}
+
+/* -------- Lista dentro de cada fila de proyecto -------- */
+.tabla-proyectos td ul {
+    margin: 0;
+    padding-left: 18px;
+    list-style: disc;
+}
+
+.tabla-proyectos td ul li {
+    color: #6b7094;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Primer li = título del proyecto */
+.tabla-proyectos td ul li:first-child {
+    color: #252EB0;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+/* Segundo li = estado (lo estilizamos como badge) */
+.tabla-proyectos td ul li:nth-child(2) {
+    color: #FFFFFF;
+    background-color: #527CFF;
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    box-shadow: 0 2px 6px rgba(82, 124, 255, 0.3);
+    margin: 4px 0;
+    list-style: none;
+}
+
+/* Tercer li = rol y horas */
+.tabla-proyectos td ul li:nth-child(3) {
+    color: #6b7094;
+    font-size: 0.88rem;
+}
+
+/* -------- Fila vacía -------- */
+.empty-row {
+    text-align: center;
+    color: #6b7094;
+    padding: 40px 24px !important;
+    font-style: italic;
+    font-size: 1rem;
+}
+
+/* -------- Responsive -------- */
+@media (max-width: 768px) {
+    body {
+        padding: 25px 12px;
+    }
+
+    .form-container {
+        padding: 22px 16px;
+    }
+
+    .form-container > a:first-of-type {
+        width: 100%;
+        text-align: center;
+    }
+
+    .form-container h1 {
+        font-size: 1.35rem;
+    }
+
+    .tabla-proyectos tbody td {
+        padding: 12px 10px;
+        font-size: 0.88rem;
+    }
+
+    .tabla-proyectos td ul li:first-child {
+        font-size: 0.95rem;
+    }
+}

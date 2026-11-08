@@ -17,7 +17,7 @@
             
             <div class="detail-group">
                 <label>Título:</label>
-                <p class="detail-value">{{ $esteProyecto->title }}</p>
+                <p class="detail-value">{{ $esteProyecto-> title }}</p>
             </div>
 
             <div class="detail-group">
@@ -35,11 +35,28 @@
             <div class="detail-group">
                 <label>Estado:</label>
                 <p class="detail-value">
-                    <span class="status-badge status-{{ str_replace(' ', '-', $esteProyecto->status) }}">
-                        {{ ucfirst($esteProyecto->status) }}
+                    <span class="status-badge status">
+                        {{ $esteProyecto->status }}
                     </span>
                 </p>
             </div>
+
+             <div class="detail-group">
+    <label>Colaboradores:</label>
+    <ul class="detail-value">
+
+        <!-- $esteProyecto->users vs $esteProyecto->users(): sin paréntesis obtienes los datos (la colección); con paréntesis obtienes el constructor de consultas de la relación, útil para encadenar ->where(...) o ->attach(...). Es una confusión muy común. -->
+
+        @forelse ($esteProyecto->users as $usuario)
+            <li>
+                {{ $usuario->name }}
+                <small>({{ $usuario->pivot->role }}, {{ $usuario->pivot->contribution_hours }} h)</small>
+            </li>
+        @empty
+            <li>Este proyecto aún no tiene colaboradores.</li>
+        @endforelse
+    </ul>
+</div>
 
         </div>
 
@@ -47,6 +64,7 @@
         <div class="actions-container">
             <a href="{{ route('projects.edit', $esteProyecto->id) }}" class="btn-submit" style="text-align: center; text-decoration: none; display: inline-block;">Editar Proyecto</a>
         </div>
+
 
         <div class="back-link">
             <a href="{{ route('dashboard') }}">Volver al listado</a>
