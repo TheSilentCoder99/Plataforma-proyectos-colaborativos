@@ -6,7 +6,7 @@
     <title>Nuevo proyecto</title>
     <!-- Enlazamos el archivo CSS externo -->
      <!-- assets manda a la Laravel a buscar en public -->
-    <link rel="stylesheet" href="{{ asset('css/crear_proyecto.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/crear_proyecto.css') }}">
 </head>
 <body>
 

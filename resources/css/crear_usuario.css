@@ -1,0 +1,204 @@
+/* ============================================
+   Paleta:
+   - Primario:    #252EB0 (azul oscuro)
+   - Secundario:  #527CFF (azul claro)
+   - Neutro:      #FFFFFF (blanco)
+   ============================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+/* -------- Header (slot) -------- */
+.header-bar {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-title {
+    color: #252EB0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+/* -------- Contenedor general -------- */
+.crear-usuario {
+    background: linear-gradient(135deg, #252EB0 0%, #527CFF 100%);
+    min-height: calc(100vh - 65px);
+    padding: 40px 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.crear-usuario__container {
+    width: 100%;
+    max-width: 640px;
+}
+
+/* -------- Alerta de errores -------- */
+.alert-error {
+    background-color: #ffe6e6;
+    color: #b02525;
+    border-left: 4px solid #b02525;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 8px rgba(37, 46, 176, 0.1);
+}
+
+.alert-error ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.alert-error li {
+    padding: 3px 0;
+}
+
+/* -------- Tarjeta -------- */
+.card {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(37, 46, 176, 0.35);
+    border-top: 6px solid #252EB0;
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 40px;
+}
+
+/* -------- Formulario -------- */
+.form-usuario {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    color: #252EB0;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: #333;
+    background-color: #f4f6ff;
+    border: 2px solid #e0e4ff;
+    border-left: 4px solid #527CFF;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #527CFF;
+    border-left-color: #252EB0;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(82, 124, 255, 0.15);
+}
+
+.form-group input::placeholder {
+    color: #9aa3d4;
+}
+
+/* Texto de ayuda bajo el campo */
+.hint {
+    color: #6b7094;
+    font-size: 0.8rem;
+    font-style: italic;
+    margin-top: 2px;
+}
+
+/* -------- Botón principal -------- */
+.actions-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.btn-submit {
+    background-color: #252EB0;
+    color: #FFFFFF;
+    padding: 14px 40px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: 2px solid #252EB0;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(37, 46, 176, 0.3);
+    font-family: inherit;
+}
+
+.btn-submit:hover {
+    background-color: #527CFF;
+    border-color: #527CFF;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(82, 124, 255, 0.5);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* -------- Enlace volver -------- */
+.back-link {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.back-link a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.back-link a:hover {
+    color: #e0e4ff;
+    text-decoration: underline;
+}
+
+/* -------- Responsive -------- */
+@media (max-width: 600px) {
+    .crear-usuario {
+        padding: 25px 12px;
+    }
+
+    .card-body {
+        padding: 25px 20px;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 12px 20px;
+    }
+
+    .header-title {
+        font-size: 1.25rem;
+    }
+}
