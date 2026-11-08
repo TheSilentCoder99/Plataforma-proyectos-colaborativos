@@ -5,38 +5,51 @@
    - Neutro:      #FFFFFF (blanco)
    ============================================ */
 
+/* 🔹 Reset básico */
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* -------- Header (slot) -------- */
-.header-bar {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 0 20px;
+html, body {
+    min-height: 100vh;
 }
 
-.header-title {
-    color: #252EB0;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-}
-
-/* -------- Contenedor general -------- */
-.crear-usuario {
-    background: linear-gradient(135deg, #252EB0 0%, #527CFF 100%);
-    min-height: calc(100vh - 65px);
-    padding: 40px 20px;
+/* 🔹 Fondo degradado + centrado total */
+body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #252EB0 0%, #527CFF 100%);
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: center;   /* centrado horizontal */
+    align-items: center;       /* centrado vertical */
+    padding: 40px 20px;
+    color: #333;
 }
 
-.crear-usuario__container {
+/* -------- Contenedor principal (tarjeta) -------- */
+.form-container {
+    background-color: #FFFFFF;
     width: 100%;
     max-width: 640px;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(37, 46, 176, 0.35);
+    border-top: 6px solid #252EB0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;       /* 🔹 centra título, alertas, form y enlace */
+}
+
+/* -------- Título -------- */
+.form-container h1 {
+    color: #252EB0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;        /* 🔹 título centrado */
+    margin-bottom: 25px;
+    letter-spacing: 0.3px;
+    width: 100%;
 }
 
 /* -------- Alerta de errores -------- */
@@ -50,6 +63,8 @@
     font-weight: 600;
     font-size: 0.95rem;
     box-shadow: 0 2px 8px rgba(37, 46, 176, 0.1);
+    width: 100%;
+    text-align: left;
 }
 
 .alert-error ul {
@@ -62,30 +77,23 @@
     padding: 3px 0;
 }
 
-/* -------- Tarjeta -------- */
-.card {
-    background-color: #FFFFFF;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(37, 46, 176, 0.35);
-    border-top: 6px solid #252EB0;
-    overflow: hidden;
-}
-
-.card-body {
-    padding: 40px;
-}
-
 /* -------- Formulario -------- */
-.form-usuario {
+form {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
+    align-items: center;       /* 🔹 centra los form-group */
 }
 
+/* -------- Grupos de campos -------- */
 .form-group {
     display: flex;
     flex-direction: column;
     gap: 6px;
+    width: 100%;
+    max-width: 420px;          /* 🔹 ancho legible y centrado */
+    align-items: center;
 }
 
 .form-group label {
@@ -94,6 +102,8 @@
     font-size: 0.95rem;
     text-transform: uppercase;
     letter-spacing: 0.6px;
+    text-align: center;        /* 🔹 label centrado */
+    width: 100%;
 }
 
 .form-group input {
@@ -108,6 +118,7 @@
     border-radius: 6px;
     transition: all 0.3s ease;
     outline: none;
+    text-align: center;        /* 🔹 texto del input centrado */
 }
 
 .form-group input:focus {
@@ -121,21 +132,7 @@
     color: #9aa3d4;
 }
 
-/* Texto de ayuda bajo el campo */
-.hint {
-    color: #6b7094;
-    font-size: 0.8rem;
-    font-style: italic;
-    margin-top: 2px;
-}
-
 /* -------- Botón principal -------- */
-.actions-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
 .btn-submit {
     background-color: #252EB0;
     color: #FFFFFF;
@@ -144,11 +141,13 @@
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: 0.5px;
-    transition: all 0.3s ease;
     border: 2px solid #252EB0;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(37, 46, 176, 0.3);
     font-family: inherit;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    align-self: center;        /* 🔹 botón centrado */
 }
 
 .btn-submit:hover {
@@ -165,13 +164,14 @@
 /* -------- Enlace volver -------- */
 .back-link {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
     padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid #e0e4ff;   /* 🔹 borde visible sobre fondo blanco */
+    width: 100%;
 }
 
 .back-link a {
-    color: #FFFFFF;
+    color: #252EB0;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95rem;
@@ -179,26 +179,26 @@
 }
 
 .back-link a:hover {
-    color: #e0e4ff;
+    color: #527CFF;
     text-decoration: underline;
 }
 
 /* -------- Responsive -------- */
 @media (max-width: 600px) {
-    .crear-usuario {
+    body {
         padding: 25px 12px;
     }
 
-    .card-body {
+    .form-container {
         padding: 25px 20px;
+    }
+
+    .form-container h1 {
+        font-size: 1.3rem;
     }
 
     .btn-submit {
         width: 100%;
         padding: 12px 20px;
-    }
-
-    .header-title {
-        font-size: 1.25rem;
     }
 }
