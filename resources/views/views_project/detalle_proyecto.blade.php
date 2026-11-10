@@ -50,7 +50,8 @@
         @forelse ($esteProyecto->users as $usuario)
             <li>
                 {{ $usuario->name }}
-                <small>({{ $usuario->pivot->role }}, {{ $usuario->pivot->contribution_hours }} h)</small>
+
+                <small>({{ $usuario->pivot->role }}, {{ $usuario->pivot->contribution_hours }} hrs)</small>
             </li>
         @empty
             <li>Este proyecto aún no tiene colaboradores.</li>

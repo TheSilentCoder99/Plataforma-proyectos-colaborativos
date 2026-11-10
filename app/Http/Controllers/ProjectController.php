@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -10,9 +11,12 @@ class ProjectController extends Controller
 {
     public Project $project;
 
+    public User $users;
+
     public function __construct()
     {
         $this->project = new Project();
+        $this->users = new User();
     }
 
     /**
@@ -22,6 +26,7 @@ class ProjectController extends Controller
     {
 
         $proyectos = $this->project->all();
+        
 
         return view('views_project.index_project', compact('proyectos'));
 
@@ -91,9 +96,12 @@ class ProjectController extends Controller
      */
     public function edit(string $id)
     {
+
+        $todosUsers = $this->users->all();
+
         $esteProyecto = $this->project->findOrFail($id);
 
-        return view('views_project.editar_proyecto', compact('esteProyecto'));
+        return view('views_project.editar_proyecto', compact('esteProyecto','todosUsers'));
     }
 
     /**
@@ -140,4 +148,5 @@ class ProjectController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Proyecto eliminado correctamente.');
     }
+
 }

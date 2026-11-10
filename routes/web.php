@@ -4,6 +4,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EquipoController;
+
 
 // Primero las rutas con parámetros fijos, luego el resto
 /*
@@ -49,6 +51,14 @@ Route::middleware('auth')->group(function () {
     
     
     Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+
+    Route::get('/projects/team', [EquipoController::class, 'showteam'])->name('team.showteam');
+
+    Route::post('/projects/{project}/add-user', [EquipoController::class, 'agregarUser'])->name('team.addUser');
+
+    Route::post('/projects/{project}/equipo/delete', [EquipoController::class, 'borrarUser'])->name('team.deleteUser');
+
+
 
 
     // Rutas específicas de usuarios (¡SIEMPRE ANTES de las que tienen {user}!)
