@@ -21,7 +21,7 @@ body {
     padding: 20px;
 }
 
-/* Contenedor principal del formulario */
+/* Contenedor principal */
 .form-container {
     background-color: #FFFFFF;
     width: 100%;
@@ -66,7 +66,7 @@ body {
     letter-spacing: 0.6px;
 }
 
-/* Valor del detalle */
+/* Valor del detalle (párrafos) */
 .detail-value {
     color: #333;
     font-size: 1.05rem;
@@ -94,6 +94,53 @@ body {
     white-space: pre-wrap;
 }
 
+/* -------- Lista de colaboradores (nuevo) -------- */
+/* Cuando .detail-value es una <ul>, se resetea el estilo de párrafo y se
+   aplica un layout en columna con filas tipo tarjeta. */
+ul.detail-value {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0;
+    background: none;
+    border-left: none;
+    border-radius: 0;
+}
+
+ul.detail-value li {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    background-color: #f4f6ff;
+    border-left: 4px solid #527CFF;
+    border-radius: 6px;
+    padding: 10px 14px;
+    color: #333;
+    font-size: 0.98rem;
+    transition: background-color 0.2s ease;
+}
+
+ul.detail-value li:hover {
+    background-color: #e6f0ff;
+}
+
+ul.detail-value li small {
+    color: #6b7094;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Fila vacía (sin colaboradores) */
+ul.detail-value li:only-child:not(:has(small)) {
+    justify-content: center;
+    color: #6b7094;
+    font-style: italic;
+    border-left-color: #e0e4ff;
+    background-color: #f8f9ff;
+}
+
 /* Badge de estado */
 .status-badge {
     display: inline-block;
@@ -107,9 +154,10 @@ body {
     box-shadow: 0 2px 6px rgba(82, 124, 255, 0.4);
 }
 
-/* Variantes de estado (opcional) */
+/* Variantes de estado */
 .status-badge.status-pendiente,
-.status-badge.status-pending {
+.status-badge.status-pending,
+.status-badge.status {
     background-color: #527CFF;
 }
 
@@ -121,7 +169,7 @@ body {
 .status-badge.status-completado,
 .status-badge.status-completed,
 .status-badge.status-finalizado {
-    background-color: #252EB0;
+    background-color: #1f7a4d;
 }
 
 .status-badge.status-cancelado,
@@ -136,7 +184,7 @@ body {
     margin-bottom: 20px;
 }
 
-/* Botón principal */
+/* -------- Botón principal (también usado como <a>) -------- */
 .btn-submit {
     background-color: #252EB0;
     color: #FFFFFF;
@@ -149,6 +197,15 @@ body {
     border: 2px solid #252EB0;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(37, 46, 176, 0.3);
+    font-family: inherit;
+}
+
+/* Cuando .btn-submit es un <a>: quitar subrayado y forzar alineación */
+a.btn-submit {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    line-height: 1.2;
 }
 
 .btn-submit:hover {
@@ -193,8 +250,18 @@ body {
         font-size: 1.5rem;
     }
 
-    .btn-submit {
+    .btn-submit,
+    a.btn-submit {
         width: 100%;
         padding: 12px 20px;
+    }
+
+    ul.detail-value li {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    ul.detail-value li small {
+        font-size: 0.8rem;
     }
 }

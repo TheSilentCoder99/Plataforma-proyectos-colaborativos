@@ -52,11 +52,20 @@ Route::middleware('auth')->group(function () {
     
     Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 
-    Route::get('/projects/team', [EquipoController::class, 'showteam'])->name('team.showteam');
+    Route::get('/projects/{project}/team', [EquipoController::class, 'showteam'])->name('team.showteam');
 
     Route::post('/projects/{project}/add-user', [EquipoController::class, 'agregarUser'])->name('team.addUser');
 
-    Route::post('/projects/{project}/equipo/delete', [EquipoController::class, 'borrarUser'])->name('team.deleteUser');
+    // scopeBindings obliga a que los modelos anidados en una URL tengan una relación real de padre e hijo en la base de datos. O sea, que lo que recibo por aquí tengan algo que ver entre ellos, en este caso, tener una relación de pertenencia.
+
+    /*Sin scopeBindings(): Laravel busca al usuario {user} por su ID y luego busca el {post} en toda la tabla de posts. Si alguien entra a /users/1/posts/99, y el post 99 le pertenece al usuario 2, Laravel igual cargará el post. Tendrías que escribir manualmente en el controlador algo como: if ($post->user_id !== $user->id) abort(404);
+    
+    Con scopeBindings(): Laravel busca el post únicamente dentro de los posts que pertenecen a ese usuario. Si el post 99 no es del usuario 1, lanza un 404 Not Found antes de siquiera entrar al controlador.
+    
+    Para que esto funcione, el modelo padre debe tener definida la relación de Eloquent con el nombre en plural del parámetro hijo. Otra convención más de este framework vaya*/
+
+    Route::delete('/projects/{project}/team/delete', [EquipoController::class, 'borrarUser'])->name('team.deleteUser')
+    ->scopeBindings();;
 
 
 

@@ -1,4 +1,9 @@
 /* ============================================
+   Paleta:
+   - Primario:    #252EB0 (azul oscuro)
+   - Secundario:  #527CFF (azul claro)
+   - Neutro:      #FFFFFF (blanco)
+   ============================================ */
 
 /* -------- Contenedor general -------- */
 .lista-proyectos {
@@ -14,20 +19,13 @@
 }
 
 /* -------- Header (slot) -------- */
-.lista-proyectos__header {
+.header-bar {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-}
-
-.lista-proyectos__title {
-    color: #252EB0;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.3px;
 }
 
 /* -------- Botón crear -------- */
@@ -71,7 +69,7 @@
 }
 
 /* -------- Tarjeta / contenedor tabla -------- */
-.lista-proyectos__card {
+.card {
     background-color: #FFFFFF;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(37, 46, 176, 0.35);
@@ -79,9 +77,9 @@
     overflow: hidden;
 }
 
-.lista-proyectos__card-body {
+.card-body {
     padding: 0;
-    overflow-x: auto;
+    overflow-x: auto; /* solo en escritorio si hace falta; en móvil se desactiva */
 }
 
 /* -------- Tabla -------- */
@@ -231,17 +229,31 @@
     font-size: 1rem;
 }
 
-/* -------- Responsive -------- */
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* -------- Tablet: reducir paddings -------- */
+@media (max-width: 992px) {
+    .tabla-proyectos thead th,
+    .tabla-proyectos tbody td {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+    }
+}
+
+/* -------- Móvil: convertir filas en tarjetas -------- */
 @media (max-width: 768px) {
     .lista-proyectos {
         padding: 25px 12px;
     }
 
-    .lista-proyectos__header {
+    .header-bar {
         flex-direction: column;
         gap: 12px;
         align-items: stretch;
         text-align: center;
+        padding: 0 12px;
     }
 
     .btn-crear {
@@ -249,20 +261,162 @@
         text-align: center;
     }
 
-    .tabla-proyectos thead th,
-    .tabla-proyectos tbody td {
-        padding: 12px 14px;
-        font-size: 0.88rem;
+    /* La tarjeta ya no necesita scroll horizontal */
+    .card-body {
+        overflow-x: visible;
     }
 
-    .link-accion {
+    /* Ocultamos la cabecera de la tabla */
+    .tabla-proyectos thead {
+        display: none;
+    }
+
+    /* La tabla y sus partes se comportan como bloques */
+    .tabla-proyectos,
+    .tabla-proyectos tbody,
+    .tabla-proyectos tr,
+    .tabla-proyectos td {
         display: block;
+        width: 100%;
+    }
+
+    /* Cada fila = tarjeta */
+    .tabla-proyectos tbody tr {
+        background-color: #FFFFFF;
+        border: 1px solid #e0e4ff;
+        border-left: 4px solid #527CFF;
+        border-radius: 10px;
+        margin-bottom: 14px;
+        padding: 6px 0;
+        box-shadow: 0 2px 8px rgba(37, 46, 176, 0.08);
+    }
+
+    .tabla-proyectos tbody tr:hover {
+        background-color: #f8f9ff;
+    }
+
+    /* Cada celda = línea con etiqueta a la izquierda y valor a la derecha */
+    .tabla-proyectos tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 10px 14px;
+        text-align: right;
+        border-bottom: 1px solid #eef1ff;
+        white-space: normal; /* permitir que el texto largo baje de línea */
+    }
+
+    .tabla-proyectos tbody td:last-child {
+        border-bottom: none;
+    }
+
+    /* Etiqueta de columna generada desde data-label */
+    .tabla-proyectos tbody td::before {
+        content: attr(data-label);
+        flex: 0 0 40%;
+        color: #252EB0;
+        font-weight: 700;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        text-align: left;
+        padding-right: 8px;
+    }
+
+    /* El título no debe forzar nowrap en móvil */
+    .cell-titulo,
+    .cell-fecha {
+        white-space: normal;
+    }
+
+    /* Acciones: en fila, alineadas a la derecha, con separación */
+    .cell-acciones {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+        text-align: right;
+        padding-top: 12px;
+    }
+
+    .cell-acciones::before {
+        content: "Acciones";
+        flex: 0 0 100%;
+        color: #252EB0;
+        font-weight: 700;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        text-align: left;
         margin-bottom: 4px;
     }
 
-    .link-ver,
+    .link-accion {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 6px;
+        background-color: #f4f6ff;
+        margin: 0;
+    }
+
+    .link-ver {
+        color: #527CFF;
+    }
+
+    .link-ver:hover {
+        background-color: #e6f0ff;
+        text-decoration: none;
+    }
+
     .link-editar {
-        margin-right: 0;
+        color: #c98a05;
+    }
+
+    .link-editar:hover {
+        background-color: #fff4d6;
+        text-decoration: none;
+    }
+
+    .link-borrar {
+        color: #b02525;
+    }
+
+    .link-borrar:hover {
+        background-color: #fdeaea;
+        text-decoration: none;
+    }
+
+    .form-inline {
+        display: inline-block;
+    }
+
+    /* Fila vacía ocupa toda la tarjeta sin etiqueta */
+    .empty-row {
+        display: block !important;
+        text-align: center;
+        padding: 24px 14px !important;
+    }
+
+    .empty-row::before {
+        content: none;
     }
 }
 
+/* -------- Pantallas muy pequeñas -------- */
+@media (max-width: 400px) {
+    .tabla-proyectos tbody td {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        gap: 4px;
+    }
+
+    .tabla-proyectos tbody td::before {
+        flex: none;
+    }
+
+    .cell-acciones {
+        justify-content: flex-start;
+    }
+}

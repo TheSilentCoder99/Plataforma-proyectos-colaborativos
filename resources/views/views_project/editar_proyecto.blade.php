@@ -86,6 +86,9 @@
                     @endforelse
                 </ul>
             </div>
+            
+            <a href="{{ route('team.showteam',$esteProyecto->id) }}" class="actions-container">Editar equipo...</a>
+
             <div class="actions-container">
                     <button type="submit" class="btn-submit">Guardar Cambios</button>
                 </div>

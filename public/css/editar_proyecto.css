@@ -43,6 +43,13 @@ body {
     letter-spacing: 0.5px;
 }
 
+/* -------- Fieldset (nuevo) -------- */
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
 /* Formulario */
 .project-form {
     display: flex;
@@ -102,7 +109,97 @@ body {
     color: #9aa3d4;
 }
 
-/* Botón principal */
+/* -------- Lista de colaboradores (nuevo) -------- */
+.project-form > div:has(.detail-value) {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.project-form > div:has(.detail-value) > label {
+    color: #252EB0;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.detail-value {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detail-value li {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    background-color: #f4f6ff;
+    border-left: 4px solid #527CFF;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    color: #333;
+    transition: background-color 0.2s ease;
+}
+
+.detail-value li:hover {
+    background-color: #e6f0ff;
+}
+
+.detail-value li small {
+    color: #6b7094;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Fila vacía (sin colaboradores) */
+.detail-value li:only-child:not(:has(small)) {
+    justify-content: center;
+    color: #6b7094;
+    font-style: italic;
+    border-left-color: #e0e4ff;
+    background-color: #f8f9ff;
+}
+
+/* -------- Enlace "Editar equipo..." (nuevo) -------- */
+/* Reutiliza .actions-container pero es un <a>, no un botón */
+a.actions-container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding: 12px 24px;
+    background-color: #FFFFFF;
+    color: #252EB0;
+    border: 2px solid #252EB0;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(37, 46, 176, 0.15);
+    width: 100%;
+}
+
+a.actions-container:hover {
+    background-color: #252EB0;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37, 46, 176, 0.4);
+}
+
+a.actions-container:active {
+    transform: translateY(0);
+}
+
+/* -------- Botón principal -------- */
 .actions-container {
     display: flex;
     justify-content: center;
@@ -121,6 +218,7 @@ body {
     border: 2px solid #252EB0;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(37, 46, 176, 0.3);
+    font-family: inherit;
 }
 
 .btn-submit:hover {
@@ -199,5 +297,19 @@ body {
     .btn-submit {
         width: 100%;
         padding: 12px 20px;
+    }
+
+    a.actions-container {
+        width: 100%;
+        padding: 12px 20px;
+    }
+
+    .detail-value li {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .detail-value li small {
+        font-size: 0.8rem;
     }
 }

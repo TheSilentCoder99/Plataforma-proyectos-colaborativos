@@ -1,0 +1,282 @@
+
+/* ============================================
+   Paleta:
+   - Primario:    #252EB0 (azul oscuro)
+   - Secundario:  #527CFF (azul claro)
+   - Neutro:      #FFFFFF (blanco)
+   ============================================ */
+
+/* -------- Reset básico -------- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #9a9fe6 0%, #527CFF 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* -------- Título principal -------- */
+h1 {
+    max-width: 900px;
+    margin: 0 auto 24px auto;
+    color: #FFFFFF;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-shadow: 0 2px 8px rgba(37, 46, 176, 0.45);
+}
+
+/* -------- Contenedor tipo tarjeta -------- */
+body > div {
+    max-width: 900px;
+    margin: 0 auto 24px auto;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(37, 46, 176, 0.35);
+    border-top: 6px solid #252EB0;
+    padding: 26px 28px;
+}
+
+/* -------- Etiquetas -------- */
+label {
+    display: block;
+    color: #252EB0;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 10px;
+}
+
+/* -------- Lista de colaboradores actuales -------- */
+.detail-value {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detail-value li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #f4f6ff;
+    border-left: 4px solid #527CFF;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    color: #333;
+    transition: background-color 0.2s ease;
+    min-width: 0;
+}
+
+.detail-value li:hover {
+    background-color: #e6f0ff;
+}
+
+/* Información del usuario */
+.detail-value li .user-info {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.detail-value li small {
+    color: #6b7094;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-left: 6px;
+}
+
+/* -------- Formulario y botón X de eliminar -------- */
+.detail-value li form {
+    display: inline-flex;
+    flex: 0 0 auto;
+    margin: 0;
+}
+
+.detail-value li form button {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 50%;
+    border: 2px solid #b02525;
+    background-color: #df0808;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 0.85rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.detail-value li form button:hover {
+    background-color: #b02525;
+    color: #FFFFFF;
+    transform: scale(1.08);
+    box-shadow: 0 4px 10px rgba(176, 37, 37, 0.35);
+}
+
+.detail-value li form button:active {
+    transform: scale(0.98);
+}
+
+/* -------- Fila vacía -------- */
+.detail-value li.empty-row {
+    justify-content: center;
+    color: #6b7094;
+    font-style: italic;
+    border-left-color: #e0e4ff;
+    background-color: #f8f9ff;
+}
+
+/* -------- Formulario de agregar colaboradores -------- */
+.project-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 8px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* -------- Selects e inputs -------- */
+.form-group select,
+.form-group input,
+select.form-control {
+    width: 100%;
+    padding: 11px 14px;
+    border: 2px solid #e0e4ff;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: #333;
+    background-color: #f8f9ff;
+    transition: all 0.25s ease;
+    outline: none;
+}
+
+.form-group select:focus,
+.form-group input:focus,
+select.form-control:focus {
+    border-color: #527CFF;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(82, 124, 255, 0.2);
+}
+
+/* -------- Select de usuarios disponibles -------- */
+select[size] {
+    padding: 8px;
+    background-color: #f8f9ff;
+}
+
+select[size] option {
+    padding: 8px 10px;
+    border-radius: 6px;
+    color: #333;
+    font-size: 0.92rem;
+}
+
+select[size] option:checked {
+    background-color: #252EB0;
+    color: #FFFFFF;
+}
+
+/* -------- Input de horas -------- */
+input[type="number"] {
+    max-width: 220px;
+}
+
+/* -------- Contenedor de acciones -------- */
+.actions-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid #eef1ff;
+}
+
+/* -------- Botones de acción -------- */
+.actions-container button,
+.btn-submit {
+    background-color: #252EB0;
+    color: #FFFFFF;
+    padding: 11px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: 0.4px;
+    border: 2px solid #252EB0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37, 46, 176, 0.3);
+    font-family: inherit;
+}
+
+.actions-container button:hover,
+.btn-submit:hover {
+    background-color: #527CFF;
+    border-color: #527CFF;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(82, 124, 255, 0.5);
+}
+
+.actions-container button:active,
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* -------- Responsive -------- */
+@media (max-width: 768px) {
+    body {
+        padding: 25px 12px;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+
+    body > div {
+        padding: 20px 16px;
+    }
+
+    .detail-value li {
+        flex-wrap: wrap;
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+
+    .detail-value li small {
+        font-size: 0.8rem;
+    }
+
+    .actions-container {
+        flex-direction: column;
+    }
+
+    .actions-container button,
+    .btn-submit {
+        width: 100%;
+        text-align: center;
+    }
+
+    input[type="number"] {
+        max-width: 100%;
+    }
+}
