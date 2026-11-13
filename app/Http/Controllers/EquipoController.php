@@ -55,6 +55,7 @@ whereNotIn('id', ...) es una condición de consulta: “usuarios cuyo id no est�
 // Agregar un colaborador
 public function agregarUser(Request $request, Project $project)
 {
+    
     $validated = $request->validate([
         'id' => 'required|exists:users,id',
         'role' => ['required','string', Rule::in(['Desarrollador backend', 'Desarrollador frontend', 'Scrum Master', 'Project Manager','Diseñador UX/UI','Desarrollador Full-Stack','Ingeniero QA','Ingeniero DevOps','Product Owner'])],
@@ -70,7 +71,7 @@ public function agregarUser(Request $request, Project $project)
     ]);
 
     return redirect()->route('projects.edit', $project)
-        ->with('success', 'Usuario agregado correctamente.');
+        ->with('success', 'Colaborador agregado correctamente.');
 }
 
 
@@ -85,7 +86,7 @@ public function borrarUser(Request $request, Project $project)
         $validated['id']);
 
     return redirect()->route('projects.edit',$project)
-        ->with('success', 'Usuario eliminado correctamente.');
+        ->with('success', 'Colaborador eliminado correctamente.');
 }
 
 

@@ -6,12 +6,17 @@
             <a href="{{ route('projects.create') }}" class="btn-crear">
                 Crear Proyecto
             </a>
+             <a href="{{ route('users.index') }}" class="btn-crear">
+                Ver usuarios
+            </a>
         </div>
         
     </x-slot>
 
-    <!-- Enlace al CSS externo -->
+    <!-- Enlace al CSS y JS externo -->
     <link rel="stylesheet" href="{{ asset('css/index_project.css') }}">
+    <script src="{{ asset('js/app.js') }}"></script>
+
 
     <div class="lista-proyectos">
         <div class="lista-proyectos__container">
@@ -54,7 +59,7 @@
                                         <form action="{{ route('projects.destroy', $project->id) }}" method="POST" class="form-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="link-accion link-borrar">Borrar</button>
+                                            <button type="submit" class="link-accion link-borrar borrar_proyecto">Borrar</button>
                                         </form>
                                     </td>
                                 </tr>

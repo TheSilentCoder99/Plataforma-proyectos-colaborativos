@@ -6,36 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equipo</title>
     <link rel="stylesheet" href="{{ asset('css/gestionar_equipo.css') }}">
+    <script src="{{ asset('js/app.js') }}"></script>
 </head>
 
 <body>
     <h1>Gestión del equipo</h1>
 
-    <div>
+    <div title="Pulsa el nombre de un colaborador para ver su ficha">
         <label>Colaboradores Actuales:</label>
         <ul class="detail-value">
             <!-- $ProyectoRecibeUser->users vs $ProyectoRecibeUser->users(): sin paréntesis obtienes los datos (la colección); con paréntesis obtienes el constructor de consultas de la relación, útil para encadenar ->where(...) o ->attach(...). Es una confusión muy común. -->
 
             @forelse ($ProyectoRecibeUser->users as $usuario)
                 <li>
-                    <escape><span class="user-info">
+                    <a href="{{ route('users.show', $usuario) }}" target="blank" id="enlace_user"><escape><span class="user-info">
                         {{ $usuario->name }}
                         <small>
                             ({{ $usuario->pivot->role }},
                             {{ $usuario->pivot->contribution_hours }} hrs)
                         </small>
-                    </span></escape>
+                    </span></escape></a>
 
                     <form action="{{ route('team.deleteUser', $ProyectoRecibeUser) }}" method="post">
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="id" value="{{ $usuario->id }}">
-                        <button type="submit">X</button>
+                        <button type="submit" title="Elimina este colaborador." class="boton_cancelar">X</button>
                     </form>
                 </li>
-
-
-
             @empty
                 <li class="empty-row">Este proyecto aún no tiene colaboradores.</li>
             @endforelse
@@ -59,7 +57,7 @@
         <!-- Pero qué pasa si el usuario quiere añadir varios usuarios a la vez y añadirles diferentes roles? Creo un array asociativo que una rol elegido con id de usuario? -->
 
         <div class="form-group">
-            <label for="role">Rol en el Proyecto</label>
+            <label for="role">Rol en el Proyecto:</label>
             <select id="role" name="role" required class="form-control">
                 <option value="" disabled selected>Selecciona un rol...</option>
                 <option value="Desarrollador backend">Desarrollador backend</option>
@@ -74,12 +72,21 @@
             </select>
         </div>
 
-        <label for="contribution_hours">Horas de contribución:</label>
-        <input type="number" min="0" id="contribution_hours" name="contribution_hours" required>
+        <div class="form-group">
+            <label for="contribution_hours">Horas de contribución:</label>
+            <input type="number" min="0" id="contribution_hours" name="contribution_hours" required>
+        </div>
+
+        
 
         <div class="actions-container">
             <button type="submit">Agregar colaboradores</button>
         </div>
+
+         <div class="back-link">
+            <a href="{{ route('projects.edit', $ProyectoRecibeUser) }}">Volver al proyecto</a>
+        </div>
+
     </form>
 </body>
 

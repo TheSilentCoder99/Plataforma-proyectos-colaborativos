@@ -240,6 +240,10 @@ a.btn-submit {
     text-decoration: underline;
 }
 
+#enlace_user{
+    text-decoration: none;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
     .form-container {

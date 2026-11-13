@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuevo proyecto</title>
     <!-- Enlazamos el archivo CSS externo -->
-     <!-- assets manda a la Laravel a buscar en public -->
+    <!-- assets manda a la Laravel a buscar en public -->
     <link rel="stylesheet" href="{{ asset('css/crear_proyecto.css') }}">
 </head>
-<body>
 
+<body>
     <div class="form-container">
+
         <h1>Crear Nuevo Proyecto</h1>
 
         <!-- Si hay errores de validación, los mostramos -->
@@ -60,11 +62,13 @@
             <!-- Botón de envío -->
             <button type="submit" class="btn-submit">Guardar Proyecto</button>
         </form>
-        
+
         <div class="back-link">
-            <a href="{{ route('dashboard') }}">Volver al listado</a>
+            <a href="{{ route('dashboard') }}">Volver al proyecto</a>
         </div>
+
     </div>
 
 </body>
+
 </html>

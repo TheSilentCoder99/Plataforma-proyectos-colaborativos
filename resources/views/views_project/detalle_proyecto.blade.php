@@ -41,7 +41,7 @@
                 </p>
             </div>
 
-             <div class="detail-group">
+             <div class="detail-group" title="Pulsa el nombre de un colaborador para ver su ficha">
     <label>Colaboradores:</label>
     <ul class="detail-value">
 
@@ -49,7 +49,7 @@
 
         @forelse ($esteProyecto->users as $usuario)
             <li>
-                {{ $usuario->name }}
+                <a href="{{ route('users.show', $usuario) }}" target="blank" id="enlace_user">{{ $usuario->name }}</a>
 
                 <small>({{ $usuario->pivot->role }}, {{ $usuario->pivot->contribution_hours }} hrs)</small>
             </li>

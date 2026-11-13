@@ -49,7 +49,7 @@ class ProjectController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string|',
-            'due_date' => 'required|date|after:today',
+            'due_date' => 'required|date',
             'status' => 'required',Rule::in(['terminado', 'activo', 'cancelado', 'pausado'])
         ]);
 
