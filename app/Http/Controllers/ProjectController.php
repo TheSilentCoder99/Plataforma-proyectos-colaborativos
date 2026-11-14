@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;

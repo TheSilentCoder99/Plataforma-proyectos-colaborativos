@@ -10,17 +10,22 @@
 
 <body>
     <div class="form-container" style="max-width: 900px;">
-        <a href="{{ route('users.index') }}">Ver listado de usuarios</a>
+        <a href="{{ route('users.index') }}">Volver al listado de usuarios</a>
 
         <h1>{{ $user->name }}</h1>
+        @can('update', $user)
         <a href="{{ route('users.edit', $user->id) }}" style="color: #d97706; margin-right: 5px;">Editar</a>
+        @endcan
+
         <td style="padding: 10px; text-align: right;" class="cell-acciones">
+            @can('delete',$user)
             <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
                 <button type="submit" style="color: red; background: none; border: none; cursor: pointer;">Borrar
                     usuario</button>
             </form>
+            @endcan
         </td>
 
         <div>

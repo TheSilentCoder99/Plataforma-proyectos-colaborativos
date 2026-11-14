@@ -54,6 +54,7 @@
                                     <td class="cell-acciones">
                                         <a href="{{ route('projects.show', $project->id) }}" class="link-accion link-ver">Ver</a>
 
+                                        <!-- Solo el dueño del proyecto puede actualizarlo o borrarlo -->
                                         @can('update', $project)
                                             <a href="{{ route('projects.edit', $project->id) }}">Editar</a>
                                         @endcan

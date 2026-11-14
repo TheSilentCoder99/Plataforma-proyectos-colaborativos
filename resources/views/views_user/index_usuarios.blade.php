@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Usuarios</title>
     <link rel="stylesheet" href="{{ asset('css/index_usuarios.css') }}">
-        <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 </head>
 
 
 <body>
     <div class="form-container" style="max-width: 900px;" id="arriba">
-    <!-- Ampliado para que quepa la tabla -->
+        <!-- Ampliado para que quepa la tabla -->
         <h1>Listado de usuarios</h1>
 
         @if (session('success'))
@@ -20,8 +21,11 @@
             </div>
         @endif
 
-            <a href="{{ route('users.create') }}">Crear nuevo usuario</a>
-             <a href="{{ route('dashboard') }}">Ver proyectos</a>
+        @can('create')
+        <a href="{{ route('users.create') }}">Crear nuevo usuario</a>
+        @endcan
+
+        <a href="{{ route('dashboard') }}">Ver proyectos</a>
         <a href="{{ route('projects.create') }}">Crear proyecto</a>
 
         <!-- Datos del usuario de cada usuario-->
@@ -39,13 +43,13 @@
                     <tr style="border-bottom: 1px solid #ddd;">
                         <td style="padding: 10px;" class="cell-nombre">{{ $user->name }}</td>
                         <td style="padding: 10px;">{{ Str::limit($user->email, 50) }}</td>
-                        
+
                         <!-- Mostramos los proyectos de este usuario gracias a la relación -->
                         <td style="padding: 10px;">
                             @if($user->projects->count() > 0)
                                 <ul style="margin: 0; padding-left: 15px;">
 
-                                <!-- Recorro los proyectos de cada usuario y traigo el título y el status -->
+                                    <!-- Recorro los proyectos de cada usuario y traigo el título y el status -->
                                     @foreach($user->projects as $proyecto)
 
                                         <li>{{ $proyecto->title }}</li>
@@ -60,14 +64,25 @@
                         </td>
 
                         <td style="padding: 10px; text-align: right;" class="cell-acciones">
-                            <a href="{{ route('users.show', $user->id) }}" style="color: #252EB0; margin-right: 5px;">Ver</a>
-                            <a href="{{ route('users.edit', $user->id) }}" style="color: #d97706; margin-right: 5px;">Editar</a>
+                            <a href="{{ route('users.show', $user->id) }}"
+                                style="color: #252EB0; margin-right: 5px;">Ver</a>
 
-                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" style="color: red; background: none; border: none; cursor: pointer;" class="borrar_user">Borrar usuario</button>
-                            </form>
+                            <!-- Solo se puede editar un usuario si uno mismo es admin -->
+                            @can('update', $user)
+                                <a href="{{ route('users.edit', $user->id) }}"
+                                    style="color: #d97706; margin-right: 5px;">Editar</a>
+                            @endcan
+
+                            <!-- Solo se puede borrar un usuario si uno mismo es admin -->
+                            @can('delete', $user)
+                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" style="color: red; background: none; border: none; cursor: pointer;"
+                                        class="borrar_user">Borrar usuario</button>
+                                </form>
+                            @endcan
+
                         </td>
                     </tr>
                 @empty
@@ -83,4 +98,5 @@
     </div>
     <a href="#arriba" class="btn-ir-arriba">Ir arriba</a>
 </body>
+
 </html>

@@ -62,9 +62,11 @@
         </div>
 
         <!-- Botones de acción -->
+         @can('update',$esteProyecto)
         <div class="actions-container">
             <a href="{{ route('projects.edit', $esteProyecto->id) }}" class="btn-submit" style="text-align: center; text-decoration: none; display: inline-block;">Editar Proyecto</a>
         </div>
+        @endcan
 
 
         <div class="back-link">

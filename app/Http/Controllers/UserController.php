@@ -8,6 +8,8 @@ use Illuminate\Validation\Rule;
 
 // Revisar Feature Tests (Pruebas de característica).
 
+// Creo que este controlador no tiene sentido para usuarios normales ya que Breeze trae todo un mega CRUD con el que los usuarios se pueden autogestionar. Esto serviría para un usuario con rol de administrador, pero eso no está en esta BD. Tampoco tiene sentido aplicarle policies si es un administrador. Revisar después. 
+
 class UserController extends Controller
 {
     protected $user;
@@ -41,6 +43,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        $this->authorize('update');
         return view('views_user.crear_usuario');
     }
 
