@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -37,6 +38,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        
         return view('views_project.crear_proyecto');
     }
 
@@ -94,12 +96,14 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
+    public function edit(Project $project)
+    {   
+        // Las policies siempre se ponen al principio del método
+        $this->authorize('update', $project);
 
         $todosUsers = $this->users->all();
 
-        $esteProyecto = $this->project->findOrFail($id);
+        $esteProyecto = $this->project->findOrFail($project->id);
 
         return view('views_project.editar_proyecto', compact('esteProyecto','todosUsers'));
     }
@@ -107,8 +111,12 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $project)
+    public function update(Request $request, Project $project)
     {
+
+        // Las policies siempre se ponen al principio del método
+        $this->authorize('update', $project);
+
 
         $esteProyecto = $this->project->find($project);
 
@@ -135,13 +143,14 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Project $project)
     {
 
-        /*delete() en un modelo Eloquent no acepta argumentos: borra ese mismo modelo. */
+        $this->authorize('delete', $project);
 
+        /*delete() en un modelo Eloquent no acepta argumentos: borra ese mismo modelo. */
         // Se busca
-        $esteProyecto = $this->project->find($id);
+        $esteProyecto = $this->project->findOrFail($project->id);
 
         // Se elimina
        $esteProyecto->delete();

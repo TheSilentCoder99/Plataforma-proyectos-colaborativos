@@ -8,6 +8,7 @@
 /* -------- Reset básico -------- */
 * {
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 
@@ -218,6 +219,62 @@ body {
     padding: 40px 24px !important;
     font-style: italic;
     font-size: 1rem;
+}
+
+/* -------- Botón "Ir arriba" -------- */
+.btn-ir-arriba {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    background-color: #252EB0;
+    color: #FFFFFF;
+    padding: 11px 20px;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+    border: 2px solid #252EB0;
+    box-shadow: 0 6px 18px rgba(37, 46, 176, 0.4);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-ir-arriba:hover {
+    background-color: #527CFF;
+    border-color: #527CFF;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(82, 124, 255, 0.55);
+}
+
+.btn-ir-arriba:active {
+    transform: translateY(-1px);
+}
+
+/* Flecha opcional antes del texto */
+.btn-ir-arriba::before {
+    content: "↑";
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* Responsive: en móvil más pequeño y pegado al borde */
+@media (max-width: 768px) {
+    .btn-ir-arriba {
+        bottom: 16px;
+        right: 16px;
+        padding: 10px 16px;
+        font-size: 0.82rem;
+    }
 }
 
 /* -------- Responsive -------- */

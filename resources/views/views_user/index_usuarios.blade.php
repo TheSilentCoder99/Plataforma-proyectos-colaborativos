@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Usuarios</title>
     <link rel="stylesheet" href="{{ asset('css/index_usuarios.css') }}">
+        <script src="{{ asset('js/app.js') }}"></script>
 </head>
 
 
 <body>
-    <div class="form-container" style="max-width: 900px;"> <!-- Ampliado para que quepa la tabla -->
+    <div class="form-container" style="max-width: 900px;" id="arriba">
+    <!-- Ampliado para que quepa la tabla -->
         <h1>Listado de usuarios</h1>
 
         @if (session('success'))
@@ -19,6 +21,8 @@
         @endif
 
             <a href="{{ route('users.create') }}">Crear nuevo usuario</a>
+             <a href="{{ route('dashboard') }}">Ver proyectos</a>
+        <a href="{{ route('projects.create') }}">Crear proyecto</a>
 
         <!-- Datos del usuario de cada usuario-->
         <table class="tabla-proyectos" style="width: 100%; border-collapse: collapse;">
@@ -62,7 +66,7 @@
                             <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" style="color: red; background: none; border: none; cursor: pointer;">Borrar</button>
+                                <button type="submit" style="color: red; background: none; border: none; cursor: pointer;" class="borrar_user">Borrar usuario</button>
                             </form>
                         </td>
                     </tr>
@@ -77,5 +81,6 @@
             </tbody>
         </table>
     </div>
+    <a href="#arriba" class="btn-ir-arriba">Ir arriba</a>
 </body>
 </html>

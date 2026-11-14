@@ -29,10 +29,10 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $users = User::factory(10)->create();
+        $users = User::factory(20)->create();
 
         // 2. Crear 10 proyectos usando el Factory
-        $projects = Project::factory(10)->create([
+        $projects = Project::factory(20)->create([
             // Forzamos que el dueño (user_id) sea aleatorio entre los 5 usuarios creados antes
             'user_id' => $users->random()->id,
         ]);

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
 
-        <div class="header-bar">
+        <div class="header-bar" id="arriba">
         
             <a href="{{ route('projects.create') }}" class="btn-crear">
                 Crear Proyecto
@@ -54,13 +54,18 @@
                                     <td class="cell-acciones">
                                         <a href="{{ route('projects.show', $project->id) }}" class="link-accion link-ver">Ver</a>
 
-                                        <a href="{{ route('projects.edit', $project->id) }}" class="link-accion link-editar">Editar</a>
+                                        @can('update', $project)
+                                            <a href="{{ route('projects.edit', $project->id) }}">Editar</a>
+                                        @endcan
 
+                                        @can('delete', $project)
                                         <form action="{{ route('projects.destroy', $project->id) }}" method="POST" class="form-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="link-accion link-borrar borrar_proyecto">Borrar</button>
                                         </form>
+                                        @endcan
+
                                     </td>
                                 </tr>
                             @empty
@@ -72,9 +77,10 @@
                             @endforelse
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
+            <a href="#arriba" class="btn-ir-arriba">Ir arriba</a>
+
     </div>
 </x-app-layout>

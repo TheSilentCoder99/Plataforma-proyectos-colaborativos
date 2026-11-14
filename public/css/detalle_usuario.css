@@ -216,6 +216,10 @@ body {
     font-size: 1rem;
 }
 
+#enlace_detalle_project{
+    text-decoration: none;
+}
+
 /* -------- Responsive -------- */
 @media (max-width: 768px) {
     body {

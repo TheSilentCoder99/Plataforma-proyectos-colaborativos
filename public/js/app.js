@@ -28,6 +28,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
+
+
+    const botonesBorrarUser = document.querySelectorAll('.borrar_user');
+
+    botonesBorrarUser.forEach(boton => {
+
+        boton.addEventListener('click', (e) => {
+
+            if (!confirm('¿Seguro que quieres eliminar este usuario? Se perderán todos sus proyectos creados. Esta acción no se puede deshacer.')) {
+                e.preventDefault();
+            }
+            
+        });
+
+    });
+
     
 
 });

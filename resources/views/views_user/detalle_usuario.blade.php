@@ -33,16 +33,16 @@
             </div>
         @endif
 
-        <table class="tabla-proyectos" style="width: 100%; border-collapse: collapse;">
+        <table class="tabla-proyectos" style="width: 100%; border-collapse: collapse;" title="pulsa el nombre de un proyecto para consultar sus detalles.">
             <tbody>
                 @forelse($user->projects as $proyecto)
                     <tr style="border-bottom: 1px solid #ddd;">
                         <td style="padding: 10px;">
-                            <ul style="margin: 0; padding-left: 15px;">
+                            <a href="{{ route('projects.show',$proyecto) }}" target="_blank" id="enlace_detalle_project"><ul style="margin: 0; padding-left: 15px;">
                                 <li>{{ $proyecto->title }}</li>
                                 <li>{{ $proyecto->status }}</li>
                                 <li>{{ $proyecto->pivot->role }} - {{ $proyecto->pivot->contribution_hours }} hrs</li>
-                            </ul>
+                            </ul></a>
                         </td>
                     </tr>
                 @empty

@@ -64,7 +64,7 @@
         </form>
 
         <div class="back-link">
-            <a href="{{ route('dashboard') }}">Volver al proyecto</a>
+            <a href="{{ route('dashboard') }}">Volver al listado</a>
         </div>
 
     </div>

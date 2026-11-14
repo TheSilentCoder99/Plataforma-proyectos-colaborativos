@@ -24,7 +24,8 @@ Route::get('/', function () {
 require __DIR__.'/auth.php';
 
 
-// 3. ZONA BLINDADA: Solo pueden entrar los usuarios que YA han iniciado sesión (se le podrían añadir más "porteros" como 'verified' pero creo que con estar autenticado es suficiente)
+// 3. ZONA BLINDADA: Solo pueden entrar los usuarios que YA han iniciado sesión (se le podrían añadir más "porteros" como 'verified')
+// Que un usuario esté autenticado (inicio de sesión) o verificado (confirmar email), no quiere decir que esté autorizado a hacer algo.
 Route::middleware('auth')->group(function () {
 
      // Perfil: cada usuario edita SU propia cuenta (sin {user} en la URL). Estas rutas vienen por defecto al instalar Breeze. En cada proyecto nuevo, no las elimines ni las modifiques
