@@ -1,58 +1,209 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PRACTICA-LARAVEL
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Plataforma web de gestión de proyectos colaborativos desarrollada con **Laravel** como proyecto final del módulo de Desarrollo Web en Entorno Servidor (DWES), correspondiente al segundo curso del Ciclo Formativo de Grado Superior en Desarrollo de Aplicaciones Web (DAW).
 
-## About Laravel
+## Descripción
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+PRACTICA-LARAVEL es una aplicación web que permite gestionar proyectos y organizar equipos de trabajo desde una única plataforma.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Los usuarios pueden registrarse, iniciar sesión y gestionar sus proyectos, así como incorporar colaboradores y asignarles diferentes responsabilidades dentro de cada proyecto.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+La aplicación está desarrollada siguiendo la arquitectura MVC de Laravel, utilizando Blade para generar las vistas en el servidor (SSR).
 
-## Learning Laravel
+## Funcionalidades
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+La aplicación contempla las siguientes funcionalidades:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Autenticación de usuarios:** registro, inicio de sesión y cierre de sesión.
+- **Gestión de proyectos:** creación, consulta, edición y eliminación de proyectos (CRUD).
+- **Gestión de colaboradores:** incorporación de usuarios a proyectos existentes.
+- **Asignación de roles:** posibilidad de definir el papel de cada colaborador dentro de un proyecto.
+- **Seguimiento de horas:** registro de las horas de contribución de los participantes.
+- **Control de permisos:** los propietarios de los proyectos pueden gestionar sus propios proyectos y colaboradores.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Tecnologías utilizadas
 
-## Agentic Development
+| Tecnología | Utilización |
+|---|---|
+| PHP 8.3+ | Lenguaje de programación del servidor |
+| Laravel 13 | Framework backend |
+| Blade | Motor de plantillas |
+| MySQL | Sistema gestor de bases de datos |
+| Eloquent ORM | Gestión de modelos y relaciones |
+| Laravel Sail | Entorno de desarrollo con Docker |
+| JavaScript | Interactividad en el cliente |
+| Vite | Gestión de recursos frontend |
+| CSS | Estilos de la interfaz |
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Modelo de datos
+
+La aplicación utiliza las siguientes entidades principales:
+
+- **Users:** almacena la información de los usuarios registrados.
+- **Projects:** almacena los proyectos, incluyendo su título, descripción, fecha límite, estado y propietario.
+- **Project_User:** tabla intermedia que establece la relación muchos a muchos entre usuarios y proyectos.
+
+La relación entre usuarios y proyectos permite que:
+
+- Un usuario pueda crear varios proyectos.
+- Un proyecto pertenezca a un único usuario propietario.
+- Un usuario pueda colaborar en diferentes proyectos.
+- Un proyecto pueda tener múltiples colaboradores.
+
+La tabla intermedia `project_user` incorpora información adicional sobre cada participación:
+
+- `role`: función desempeñada por el colaborador.
+- `contribution_hours`: horas dedicadas al proyecto.
+
+## Instalación y ejecución
+
+### Requisitos previos
+
+- Git.
+- Docker y Docker Compose.
+- PHP 8.3 o superior.
+- Composer.
+- Node.js y npm.
+
+### 1. Clonar el repositorio
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone <URL_DEL_REPOSITORIO>
+cd PRACTICA-LARAVEL
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Instalar dependencias PHP
 
-## Contributing
+```bash
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Configurar las variables de entorno
 
-## Code of Conduct
+Crear el archivo `.env` a partir del archivo de ejemplo:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+cp .env.example .env
+```
 
-## Security Vulnerabilities
+Configurar las variables de conexión a la base de datos según el servicio definido en `compose.yaml`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Iniciar los contenedores
 
-## License
+```bash
+./vendor/bin/sail up -d
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 5. Generar la clave de aplicación
+
+```bash
+./vendor/bin/sail artisan key:generate
+```
+
+### 6. Ejecutar las migraciones
+
+```bash
+./vendor/bin/sail artisan migrate
+```
+
+Si el proyecto dispone de seeders para generar datos de prueba:
+
+```bash
+./vendor/bin/sail artisan db:seed
+```
+
+### 7. Instalar dependencias frontend
+
+```bash
+npm install
+```
+
+### 8. Compilar los recursos frontend
+
+Para desarrollo:
+
+```bash
+npm run dev
+```
+
+Para generar los recursos de producción:
+
+```bash
+npm run build
+```
+
+Una vez completados estos pasos, la aplicación estará disponible en:
+
+```text
+http://localhost
+```
+
+Para detener los contenedores:
+
+```bash
+./vendor/bin/sail down
+```
+
+## Estructura del proyecto
+
+La aplicación sigue la estructura convencional de Laravel:
+
+```text
+PRACTICA-LARAVEL/
+│
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   └── Requests/
+│   ├── Models/
+│   └── Policies/
+│
+├── bootstrap/
+├── config/
+├── database/
+│   ├── migrations/
+│   ├── seeders/
+│   └── factories/
+│
+├── public/
+├── resources/
+│   ├── css/
+│   ├── js/
+│   └── views/
+│
+├── routes/
+│   └── web.php
+│
+├── storage/
+├── tests/
+├── compose.yaml
+├── composer.json
+├── package.json
+└── README.md
+```
+
+*La estructura mostrada es orientativa y puede variar según la organización definitiva del código.*
+
+## Seguridad
+
+La aplicación contempla diferentes mecanismos de seguridad:
+
+- Autenticación para proteger las funcionalidades privadas.
+- Autorización para limitar las operaciones de gestión de proyectos a sus propietarios.
+- Validación de los datos recibidos mediante las herramientas de Laravel.
+- Protección CSRF en los formularios.
+- Uso del sistema de relaciones de Eloquent para gestionar la integridad de los datos.
+
+## Autor
+
+Proyecto desarrollado individualmente como parte del módulo de Desarrollo Web en Entorno Servidor (DWES).
+
+**Ciclo formativo:** Desarrollo de Aplicaciones Web (DAW)  
+**Centro educativo:** IES Celia Viñas  
+**Curso académico:** 2026/2027
+
+---
+
+## Licencia
+
+Proyecto desarrollado con fines educativos.
