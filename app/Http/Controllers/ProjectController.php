@@ -38,7 +38,8 @@ class ProjectController extends Controller
         if ($busqueda) {
             $consulta->where(function ($grupo) use ($busqueda) {
                 $grupo->where('title', 'like', "%{$busqueda}%")
-                    ->orWhere('description', 'like', "%{$busqueda}%");
+                    ->orWhere('description', 'like', "%{$busqueda}%")
+                    ->orWhere('status', 'like', "%{$busqueda}%");
             });
         }
 
