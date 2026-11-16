@@ -22,7 +22,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
 
         // Eager Loading (carga previa)
@@ -31,8 +31,18 @@ class UserController extends Controller
 
         /*Básicamente, con ::with('loquesea')->get(); lo que consigo es que ANTES de que toda la información llegue a mi RAM, SQL haga dos consultas super optimizadas para traerme tanto la tabla de todos los objetos junto con la propiedad de la tabla pivote que le estoy pidiendo, evitando el N+1 de tener que ir a buscar, en este caso, el proyecto de cada usuario que se esté recorriendo en el for-each  */
 
-        $usuarios = $this->user::with(['projects', 'ownedProjects'])->get();
-        
+        $busqueda = $request->query('q');
+
+        $usuarios = $this->user::with(['projects', 'ownedProjects'])
+            ->when($busqueda, function ($query, $busqueda) {
+                $query->where(function ($grupo) use ($busqueda) {
+                    $grupo->where('name', 'like', "%{$busqueda}%")
+                        ->orWhere('email', 'like', "%{$busqueda}%");
+                });
+            })
+            ->latest()
+            ->get();
+
         // Retornamos la vista pasándole la colección de usuarios
         return view('views_user.index_usuarios', compact('usuarios'));
     }
@@ -43,8 +53,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        $this->authorize('update');
-        return view('views_user.crear_usuario');
+            $this->authorize('create', User::class);
+            
+            return view('views_user.crear_usuario');
     }
 
     /**
@@ -102,17 +113,19 @@ class UserController extends Controller
         // 1. Validamos los datos nuevos
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => ['required', 'email', Rule::unique('users')->ignore($user)]
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user)],
+            'password' => 'required|string|min:8'
         ]);
 
         // 2. Actualizamos el registro en la base de datos
         $user->update([
             'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
+            'email' => $validatedData['email'],            
+            'password' => $validatedData['password']
         ]);
 
         // 3. Redirigimos a la vista de detalle o listado
-        return redirect()->route('views_user.detalle_usuario', $user)->with('success', 'Usuario actualizado correctamente.');
+        return redirect()->route('users.show', $user)->with('success', 'Usuario actualizado correctamente.');
     }
 
 

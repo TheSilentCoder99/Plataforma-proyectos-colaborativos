@@ -10,8 +10,8 @@
 </head>
 
 <body>
-    <h1>Gestión del equipo</h1>
-
+    <h1>{{$ProyectoRecibeUser->title}}</h1>
+    <h2>Gestión del equipo</h2>
     <div title="Pulsa el nombre de un colaborador para ver su ficha">
         <label>Colaboradores Actuales:</label>
         <ul class="detail-value">

@@ -32,7 +32,7 @@
 
         <form action="{{ route('users.update', $user->id) }}" method="POST" class="form-usuario">
             @csrf
-            @method('PUT')
+            @method('PATCH')
 
             <div class="form-group">
                 <label for="name">Nombre</label>
@@ -61,6 +61,20 @@
                     placeholder="correo@ejemplo.com"
                     required>
                 @error('email')
+                    <span class="error-msg">{{ $message }}</span>
+                @enderror
+            </div>
+
+                    <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="@error('password') input-error @enderror"
+                    required
+                    placeholder="minimo 8 caractéres">
+                @error('password')
                     <span class="error-msg">{{ $message }}</span>
                 @enderror
             </div>

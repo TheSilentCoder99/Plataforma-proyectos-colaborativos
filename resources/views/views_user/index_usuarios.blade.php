@@ -9,6 +9,14 @@
     <script src="{{ asset('js/app.js') }}"></script>
 </head>
 
+<form action="{{ route('users.index') }}" method="GET" class="search-form">
+    <input type="search" name="q" value="{{ request('q') }}" placeholder="Buscar usuarios..." class="search-input">
+    <button type="submit" class="search-btn">Buscar</button>
+
+    @if (request('q'))
+        <a href="{{ route('users.index') }}" class="search-clear">Limpiar</a>
+    @endif
+</form>
 
 <body>
     <div class="form-container" style="max-width: 900px;" id="arriba">
@@ -25,7 +33,7 @@
         Con solo el nombre 'create' y sin clase, Laravel no sabe a qué Policy preguntar, porque no hay modelo del que deducirla. Buscaría un Gate llamado create, no lo encontraría y denegaría siempre. Para las acciones sin instancia se pasa la clase:
         Con la clase, Laravel localiza UserPolicy y llama a create($authUser). -->
         @can('create', App\Models\User::class)
-        <a href="{{ route('users.create') }}">Crear nuevo usuario</a>
+            <a href="{{ route('users.create') }}">Crear nuevo usuario</a>
         @endcan
 
         <a href="{{ route('dashboard') }}">Ver proyectos</a>

@@ -29,7 +29,19 @@ h1 {
     margin: 0 auto 24px auto;
     color: #FFFFFF;
     font-size: 1.8rem;
-    font-weight: 700;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(37, 46, 176, 0.45);
+}
+
+h2 {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto 24px auto;
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 650;
     letter-spacing: 0.4px;
     text-align: center;
     text-shadow: 0 2px 8px rgba(37, 46, 176, 0.45);

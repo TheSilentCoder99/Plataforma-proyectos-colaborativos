@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Usuarios</title>
     <link rel="stylesheet" href="{{ asset('css/detalle_usuario.css') }}">
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
 <body>
@@ -22,7 +23,7 @@
             <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
-                <button type="submit" style="color: red; background: none; border: none; cursor: pointer;">Borrar
+                <button type="submit" style="color: red; background: none; border: none; cursor: pointer;" class="borrar_user">Borrar
                     usuario</button>
             </form>
             @endcan

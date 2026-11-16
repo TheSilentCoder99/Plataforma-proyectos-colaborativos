@@ -70,7 +70,7 @@ public function agregarUser(Request $request, Project $project)
         ]
     ]);
 
-    return redirect()->route('projects.edit', $project)
+    return redirect()->route('team.showteam', $project)
         ->with('success', 'Colaborador agregado correctamente.');
 }
 

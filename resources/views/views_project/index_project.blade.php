@@ -10,13 +10,24 @@
                 Ver usuarios
             </a>
         </div>
-        
     </x-slot>
 
     <!-- Enlace al CSS y JS externo -->
     <link rel="stylesheet" href="{{ asset('css/index_project.css') }}">
     <script src="{{ asset('js/app.js') }}"></script>
 
+    <!-- formulario de búsqueda de un proyecto concreto
+     La petición GET se hace en esta misma ventana, por eso redirige a esta misma vista. -->
+    <form action="{{ route('dashboard') }}" method="GET" class="search-form">
+    
+    <input type="search" name="q" placeholder="Buscar proyectos..." class="search-input">
+    <button type="submit" class="search-btn">Buscar</button>
+
+    <!-- Si se ha buscado algo, se despliegue un enlace para volver a ver todos los proyectos -->
+    @if (request('q'))
+        <a href="{{ route('dashboard') }}" class="search-clear">Ver todos</a>
+    @endif
+</form>
 
     <div class="lista-proyectos">
         <div class="lista-proyectos__container">

@@ -21,11 +21,32 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // esto es lo que va a escribir el usuario en el formulario
+        $busqueda = $request->query('q');
 
-        $proyectos = $this->project->all();
-        
+        /* 2. Iniciamos el Constructor de Consultas (Query Builder) del modelo Project. Crea una instancia del Query Builder de Eloquent. No ejecuta la consulta de inmediato; nos permite ir "construyéndola" dinámicamente según si hay búsqueda o no. */
+        $consulta = Project::query();
+
+        /*Qué hace function ($grupo)
+        Cuando le pasas un closure a where(), Laravel dice: “abre un paréntesis en el SQL, créame un Builder nuevo para lo de dentro y pásamelo”. Ese Builder es $grupo. Todo lo que añadas a $grupo queda dentro de los paréntesis.
+
+        Qué hace use ($busqueda)
+        En PHP, una función anónima (closure) no ve las variables de fuera automáticamente. Es como una habitación cerrada: lo de fuera no entra. use ($busqueda) es la forma de decir “tráete esta variable de fuera al interior del closure” */
+
+        if ($busqueda) {
+            $consulta->where(function ($grupo) use ($busqueda) {
+                $grupo->where('title', 'like', "%{$busqueda}%")
+                    ->orWhere('description', 'like', "%{$busqueda}%");
+            });
+        }
+
+        // 4. Ordenamos los resultados del más nuevo al más antiguo
+        $consulta->latest();
+
+        // Aquí es donde se ejecuta la consulta realmente
+        $proyectos = $consulta->get();
 
         return view('views_project.index_project', compact('proyectos'));
 
@@ -36,7 +57,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        
+
         return view('views_project.crear_proyecto');
     }
 
@@ -50,16 +71,17 @@ class ProjectController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string|',
             'due_date' => 'required|date',
-            'status' => 'required',Rule::in(['terminado', 'activo', 'cancelado', 'pausado'])
+            'status' => 'required',
+            Rule::in(['terminado', 'activo', 'cancelado', 'pausado'])
         ]);
 
-         // De esta manera puedo pasarle el id al método de creación. NUNCA directamente en el HTML: genera problemas de seguridad.
+        // De esta manera puedo pasarle el id al método de creación. NUNCA directamente en el HTML: genera problemas de seguridad.
 
         // Básicamente, esto toma el id del usuario autenticado (que Laravel ya conoce porque le crea un token asociado a su tabla en User) y lo mete al parámetro de validatedData. En resumen, cuando quieras sacar el id del usuario actual, sácalo de aquí.
 
-         $validatedData['user_id'] = auth()->id();
+        $validatedData['user_id'] = auth()->id();
 
-    
+
         /*
         Otra manera de hacer lo mismo (aunque se entiende peor):
         auth()->user()->projects()->create($validatedData);
@@ -95,13 +117,13 @@ class ProjectController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Project $project)
-    {   
+    {
         // Las policies siempre se ponen al principio del método. Llamo a la policy y le pregunto que quién puede acceder a esta lógica
         $this->authorize('update', $project);
 
         $todosUsers = $this->users->all();
 
-        return view('views_project.editar_proyecto', compact('project','todosUsers'));
+        return view('views_project.editar_proyecto', compact('project', 'todosUsers'));
     }
 
     /**
@@ -123,8 +145,8 @@ class ProjectController extends Controller
         // 2. Actualizamos el registro en la base de datos
         $project->update($validatedData);
 
-        // 3. Redirigimos a la vista de detalle o listado
-        return redirect()->route('dashboard')->with('success', 'Proyecto actualizado correctamente.');
+        // 3. Redirigimos a la vista de detalle
+        return redirect()->route('projects.show', $project)->with('success', 'Proyecto actualizado correctamente.');
     }
 
     /**
@@ -140,7 +162,7 @@ class ProjectController extends Controller
         $esteProyecto = $this->project->findOrFail($project->id);
 
         // Se elimina
-       $esteProyecto->delete();
+        $esteProyecto->delete();
 
         return redirect()->route('dashboard')->with('success', 'Proyecto eliminado correctamente.');
     }

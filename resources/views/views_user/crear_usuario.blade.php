@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Nuevo Usuario</title>
+    <title>Nuevo Usuario</title>
     <!-- Enlazamos el archivo CSS independiente -->
     <link rel="stylesheet" href="{{ asset('css/crear_usuario.css') }}">
 </head>

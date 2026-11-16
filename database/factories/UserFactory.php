@@ -24,10 +24,13 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
+            // 50% de probabilidades de ser admin / otra forma de hacerlo: 'is_admin' => rand(1, 100) > 50
+            'is_admin' => fake()->boolean(50),
             'remember_token' => Str::random(10),
         ];
     }
@@ -39,6 +42,16 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+      /**
+     * Estado para forzar que un usuario sea Administrador.
+     */
+    public function admin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_admin' => true,
         ]);
     }
 }

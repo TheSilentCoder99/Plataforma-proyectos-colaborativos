@@ -87,7 +87,7 @@
                 </ul>
             </div>
             
-            <a href="{{ route('team.showteam',$project->id) }}" class="actions-container">Editar equipo...</a>
+            <a href="{{ route('team.showteam',$project->id) }}" class="actions-container" target="_blank">Editar equipo...</a>
 
             <div class="actions-container">
                     <button type="submit" class="btn-submit">Guardar Cambios</button>
