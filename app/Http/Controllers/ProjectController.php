@@ -96,14 +96,12 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {   
-        // Las policies siempre se ponen al principio del método
+        // Las policies siempre se ponen al principio del método. Llamo a la policy y le pregunto que quién puede acceder a esta lógica
         $this->authorize('update', $project);
 
         $todosUsers = $this->users->all();
 
-        $esteProyecto = $this->project->findOrFail($project->id);
-
-        return view('views_project.editar_proyecto', compact('esteProyecto','todosUsers'));
+        return view('views_project.editar_proyecto', compact('project','todosUsers'));
     }
 
     /**
@@ -112,27 +110,18 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
 
-        // Las policies siempre se ponen al principio del método
         $this->authorize('update', $project);
-
-
-        $esteProyecto = $this->project->find($project);
 
         // valido los datos
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string|',
+            'description' => 'required|string',
             'due_date' => 'required|date|after:today',
             'status' => 'required|string'
         ]);
 
         // 2. Actualizamos el registro en la base de datos
-        $esteProyecto->update([
-            'title' => $validatedData['title'],
-            'description' => $validatedData['description'],
-            'due_date' => $validatedData['due_date'],
-            'status' => $validatedData['status']
-        ]);
+        $project->update($validatedData);
 
         // 3. Redirigimos a la vista de detalle o listado
         return redirect()->route('dashboard')->with('success', 'Proyecto actualizado correctamente.');

@@ -12,7 +12,7 @@ use App\Models\User;
 // Las policies siempre son clases y están ligadas a un modelo específico. Las Gate (que aquí no usas por ningún lado) son para acciones globales o lógicas de negocio que no dependen directamente de una tabla o modelo de la base de datos (por ejemplo: "ver el panel de administración" o "exportar reportes").
 class ProjectPolicy
 {
-    // Todos los usuarios autenticados pueden ver proyectos (de momento)
+    // Todos los usuarios autenticados pueden ver proyectos
     public function viewAny(User $user): bool
     {
         return true;
@@ -29,15 +29,15 @@ class ProjectPolicy
         return true;
     }
 
-    // Solo el creador edita
+    // Solo el creador y el administrador editan
     public function update(User $user, Project $project): bool
     {
-        return $user->id === $project->user_id;
+        return $user->id === $project->user_id || $user->is_admin;
     }
 
-    // Solo el creador borra
+    // Solo el creador y el administrador borran
     public function delete(User $user, Project $project): bool
     {
-        return $user->id === $project->user_id;
+        return $user->id === $project->user_id || $user->is_admin;
     }
 }

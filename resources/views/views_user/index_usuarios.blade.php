@@ -13,7 +13,7 @@
 <body>
     <div class="form-container" style="max-width: 900px;" id="arriba">
         <!-- Ampliado para que quepa la tabla -->
-        <h1>Listado de usuarios</h1>
+        <h1>Listado de usuarios ({{count($usuarios)}}):</h1>
 
         @if (session('success'))
             <div class="alert-success" style="margin-bottom: 20px; color: green;">
@@ -21,7 +21,10 @@
             </div>
         @endif
 
-        @can('create')
+        <!-- El método create de una Policy solo recibe el usuario autenticado, no ningún modelo objetivo:
+        Con solo el nombre 'create' y sin clase, Laravel no sabe a qué Policy preguntar, porque no hay modelo del que deducirla. Buscaría un Gate llamado create, no lo encontraría y denegaría siempre. Para las acciones sin instancia se pasa la clase:
+        Con la clase, Laravel localiza UserPolicy y llama a create($authUser). -->
+        @can('create', App\Models\User::class)
         <a href="{{ route('users.create') }}">Crear nuevo usuario</a>
         @endcan
 

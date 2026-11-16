@@ -33,36 +33,36 @@
 
         <fieldset>
         <!-- Formulario de edición -->
-        <form action="{{ route('projects.update', $esteProyecto->id) }}" method="POST" class="project-form">
+        <form action="{{ route('projects.update', $project->id) }}" method="POST" class="project-form">
             @csrf
             @method('PATCH')
 
             <div class="form-group">
                 <label for="title">Título:</label>
-                <input type="text" id="title" name="title" value="{{ old('title', $esteProyecto->title) }}" required
+                <input type="text" id="title" name="title" value="{{ old('title', $project->title) }}" required
                     maxlength="255" placeholder="Ingresa el título del proyecto">
             </div>
 
             <div class="form-group">
                 <label for="description">Descripción:</label>
                 <textarea id="description" name="description" rows="5" required
-                    placeholder="Describe el proyecto">{{ old('description', $esteProyecto->description) }}</textarea>
+                    placeholder="Describe el proyecto">{{ old('description', $project->description) }}</textarea>
             </div>
 
             <div class="form-group">
                 <label for="due_date">Fecha de Entrega:</label>
-                <input type="date" id="due_date" name="due_date" value="{{ old('due_date', $esteProyecto->due_date) }}"
+                <input type="date" id="due_date" name="due_date" value="{{ old('due_date', $project->due_date) }}"
                     required>
             </div>
 
             <div class="form-group">
                 <label for="status">Estado:</label>
                 <select id="status" name="status" required>
-                    <option value="pendiente" {{ old('status', $esteProyecto->status) == 'pendiente' ? 'selected' : '' }}>
+                    <option value="pendiente" {{ old('status', $project->status) == 'pendiente' ? 'selected' : '' }}>
                         Pendiente</option>
-                    <option value="en progreso" {{ old('status', $esteProyecto->status) == 'en progreso' ? 'selected' : '' }}>En Progreso</option>
-                    <option value="completado" {{ old('status', $esteProyecto->status) == 'completado' ? 'selected' : '' }}>Completado</option>
-                    <option value="cancelado" {{ old('status', $esteProyecto->status) == 'cancelado' ? 'selected' : '' }}>
+                    <option value="en progreso" {{ old('status', $project->status) == 'en progreso' ? 'selected' : '' }}>En Progreso</option>
+                    <option value="completado" {{ old('status', $project->status) == 'completado' ? 'selected' : '' }}>Completado</option>
+                    <option value="cancelado" {{ old('status', $project->status) == 'cancelado' ? 'selected' : '' }}>
                         Cancelado</option>
                 </select>
             </div>
@@ -76,7 +76,7 @@
                 <ul class="detail-value">
                     <!-- $esteProyecto->users vs $esteProyecto->users(): sin paréntesis obtienes los datos (la colección); con paréntesis obtienes el constructor de consultas de la relación, útil para encadenar ->where(...) o ->attach(...). Es una confusión muy común. -->
 
-                    @forelse ($esteProyecto->users as $usuario)
+                    @forelse ($project->users as $usuario)
                         <li>
                             {{ $usuario->name }}
                             <small>({{ $usuario->pivot->role }}, {{ $usuario->pivot->contribution_hours }} hrs)</small>
@@ -87,7 +87,7 @@
                 </ul>
             </div>
             
-            <a href="{{ route('team.showteam',$esteProyecto->id) }}" class="actions-container">Editar equipo...</a>
+            <a href="{{ route('team.showteam',$project->id) }}" class="actions-container">Editar equipo...</a>
 
             <div class="actions-container">
                     <button type="submit" class="btn-submit">Guardar Cambios</button>
