@@ -48,7 +48,7 @@
         <a href="{{ route('projects.create') }}">Crear proyecto</a>
 
         <!-- Datos del usuario de cada usuario-->
-        <table class="tabla-proyectos" style="width: 100%; border-collapse: collapse;">
+        <table class="tabla-proyectos" style="width: 100%; border-collapse: collapse;" title="pulsa el nombre de un usuario para acceder a su ficha">
             <thead>
                 <tr style="border-bottom: 2px solid #252EB0;">
                     <th style="text-align: left; padding: 10px;">Nombre</th>
@@ -60,7 +60,7 @@
             <tbody>
                 @forelse ($usuarios as $user)
                     <tr style="border-bottom: 1px solid #ddd;">
-                        <td style="padding: 10px;" class="cell-nombre">{{ $user->name }}</td>
+                        <td style="padding: 10px;" class="cell-nombre"><a href="{{ route('users.show',$user) }}" target="_blank" class="ver-usuarios">{{ $user->name }}</a></td>
                         <td style="padding: 10px;">{{ Str::limit($user->email, 50) }}</td>
 
                         <!-- Mostramos los proyectos de este usuario gracias a la relación -->

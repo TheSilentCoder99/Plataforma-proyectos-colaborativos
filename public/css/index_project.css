@@ -29,6 +29,8 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    flex-wrap: wrap;          /* si no caben, bajan de línea */
+    gap: 14px;                /* separación entre "Crear Proyecto" y "Ver usuarios" */
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;

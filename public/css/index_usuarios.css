@@ -255,6 +255,10 @@ body {
     white-space: nowrap;
 }
 
+.ver-usuarios{
+    text-decoration: none;
+}
+
 /* Lista de proyectos dentro de celda */
 .tabla-proyectos td ul {
     margin: 0;

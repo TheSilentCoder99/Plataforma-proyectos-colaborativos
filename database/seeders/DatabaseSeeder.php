@@ -23,19 +23,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        // Esto lo que hace es que genera x instancias de prueba aleatoriamente con la estructura de datos que tenga la tabla de la clase, en este caso, users
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Esto lo que hace es que genera x instancias de prueba aleatoriamente con la estructura de datos que tenga la tabla de la clase, en este caso, users.
 
         // Creo un usuario admin fijo. En un programa real, las credenciales nunca deben ir aquí sino en el .env
         User::factory()->admin()->create([
         'name'  => env('ADMIN_NAME', 'admin'),
         'email'=>env('ADMIN_EMAIL','admin@correo.com'),
-        'password' => env('ADMIN_PASS', 'password')
+        'password' => env('ADMIN_PASS', 'contraseña')
     ]);
 
+        // Creo un usuario por defecto normal para las pruebas de no admin.
+        User::factory()->create([
+        'name'  => 'Noadmin',
+        'email'=>'Noadmin@correo.com',
+        'password' => 'contraseña'
+        ]);
 
         $users = User::factory(20)->create();
 

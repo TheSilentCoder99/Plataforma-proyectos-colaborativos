@@ -12,7 +12,7 @@ class ProjectFactory extends Factory
             'title' => fake()->sentence(3), 
             'description' => fake()->paragraph(),
             'due_date' => fake()->dateTimeBetween('now', '+6 months'),
-            'status' => fake()->randomElement(['pendiente', 'en_progreso', 'completado']),
+            'status' => fake()->randomElement(['pendiente', 'En_progreso', 'completado','pausado','cancelado']),
             'user_id' => User::factory(), // Asocia un usuario creador por defecto
         ];
     }
