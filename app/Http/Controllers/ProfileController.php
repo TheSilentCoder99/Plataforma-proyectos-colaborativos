@@ -28,9 +28,11 @@ class ProfileController extends Controller
     {
         $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+        // Al comentar esta línea, Laravel no se "alerta" por haber cambiado un campo del modelo. Este bloque lo que hace es: comprueba que el campo email haya sido cambiado a uno nuevo y pone la columna email_verificado_en_tal_momento a null para que el usuario tenga que, lógicamente, verificar el nuevo correo que ponga.
+
+        // if ($request->user()->isDirty('email')) {
+        //     $request->user()->email_verified_at = null;
+        // }
 
         $request->user()->save();
 

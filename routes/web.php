@@ -33,7 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Rutas "sólidas" de proyectos (¡SIEMPRE ANTES de las que tienen {project}!)
+     // RUTAS de PROYECTOS
+    // Rutas "sólidas" de proyectos
     // Una vez logueados, los mandamos al listado de proyectos
    Route::get('/dashboard', [ProjectController::class, 'index'])->name('dashboard');
 
@@ -43,16 +44,16 @@ Route::middleware('auth')->group(function () {
     // Hago efectiva esa creación en la BD
     Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
 
-    // Rutas con parámetros y acciones del CRUD de usuarios
     Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
 
     Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
 
     Route::patch('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
     
-    
     Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 
+
+    // RUTAS de GESTIÓN DE EQUIPO
     Route::get('/projects/{project}/team', [EquipoController::class, 'showteam'])->name('team.showteam');
 
     Route::post('/projects/{project}/add-user', [EquipoController::class, 'agregarUser'])->name('team.addUser');
@@ -69,9 +70,7 @@ Route::middleware('auth')->group(function () {
     ->scopeBindings();;
 
 
-
-
-    // Rutas específicas de usuarios (¡SIEMPRE ANTES de las que tienen {user}!)
+    // RUTAS de USUARIOS
 
      Route::get('/users', [UserController::class, 'index'])->name('users.index');
 

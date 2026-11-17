@@ -9,16 +9,24 @@
     <script src="{{ asset('js/app.js') }}"></script>
 </head>
 
-<form action="{{ route('users.index') }}" method="GET" class="search-form">
-    <input type="search" name="q" value="{{ request('q') }}" placeholder="Buscar usuarios..." class="search-input">
-    <button type="submit" class="search-btn">Buscar</button>
-
-    @if (request('q'))
-        <a href="{{ route('users.index') }}" class="search-clear">Limpiar</a>
-    @endif
-</form>
-
 <body>
+
+    <!-- Cabecera: logo + búsqueda -->
+    <header class="site-header">
+        <a href="{{ route('dashboard') }}" class="site-logo">
+            <img src="{{ asset('img/logo_proyecto.png') }}"
+                 alt="Logo de la web. Bombilla representando la idea de los proyectos">
+        </a>
+        <form action="{{ route('users.index') }}" method="GET" class="search-form">
+            <input type="search" name="q" value="{{ request('q') }}"
+                   placeholder="Buscar usuarios..." class="search-input">
+            <button type="submit" class="search-btn">Buscar</button>
+
+            @if (request('q'))
+                <a href="{{ route('users.index') }}" class="search-clear">Limpiar</a>
+            @endif
+        </form>
+
     <div class="form-container" style="max-width: 900px;" id="arriba">
         <!-- Ampliado para que quepa la tabla -->
         <h1>Listado de usuarios ({{count($usuarios)}}):</h1>

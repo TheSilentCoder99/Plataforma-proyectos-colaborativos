@@ -12,9 +12,11 @@
         </div>
     </x-slot>
 
-    <!-- Enlace al CSS y JS externo -->
+   <head>
+     <!-- Enlace al CSS y JS externo -->
     <link rel="stylesheet" href="{{ asset('css/index_project.css') }}">
     <script src="{{ asset('js/app.js') }}"></script>
+   </head>
 
     <!-- formulario de búsqueda de un proyecto concreto
      La petición GET se hace en esta misma ventana, por eso redirige a esta misma vista. -->
@@ -29,7 +31,7 @@
     @endif
 </form>
 
-    <div class="lista-proyectos">
+    <div class="lista-proyectos" title="haz click en el nombre de un proyecto para ver sus detalles">
         <div class="lista-proyectos__container">
 
             @if (session('success'))
@@ -54,7 +56,7 @@
                         <tbody>
                             @forelse ($proyectos as $project)
                                 <tr>
-                                    <td class="cell-titulo">{{ $project->title }}</td>
+                                    <td class="cell-titulo"><a href="{{ route('projects.show',$project) }}" target="_blank">{{ $project->title }}</a></td>
                                     <td>{{ Str::limit($project->description, 50) }}</td>
                                     <td class="cell-fecha">{{ $project->due_date }}</td>
                                     <td>

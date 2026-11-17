@@ -31,8 +31,9 @@ class DatabaseSeeder extends Seeder
 
         // Creo un usuario admin fijo. En un programa real, las credenciales nunca deben ir aquí sino en el .env
         User::factory()->admin()->create([
-        'name'  => env('ADMIN_EMAIL', 'admin@correo.com'),
-        'email' => env('ADMIN_PASS', 'password')
+        'name'  => env('ADMIN_NAME', 'admin'),
+        'email'=>env('ADMIN_EMAIL','admin@correo.com'),
+        'password' => env('ADMIN_PASS', 'password')
     ]);
 
 
