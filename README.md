@@ -1,25 +1,26 @@
-# PRACTICA-LARAVEL
+# Plataforma de Proyectos Colaborativos (PRACTICA-LARAVEL)
 
 Plataforma web de gestión de proyectos colaborativos desarrollada con **Laravel** como proyecto final del módulo de Desarrollo Web en Entorno Servidor (DWES), correspondiente al segundo curso del Ciclo Formativo de Grado Superior en Desarrollo de Aplicaciones Web (DAW).
 
 ## Descripción
 
-PRACTICA-LARAVEL es una aplicación web que permite gestionar proyectos y organizar equipos de trabajo desde una única plataforma.
+Aplicación web que permite gestionar proyectos y organizar equipos de trabajo desde una única plataforma. 
 
-Los usuarios pueden registrarse, iniciar sesión y gestionar sus proyectos, así como incorporar colaboradores y asignarles diferentes responsabilidades dentro de cada proyecto.
+Los usuarios pueden registrarse, iniciar sesión, administrar sus proyectos, buscar tanto proyectos como usuarios mediante filtros, e incorporar o eliminar colaboradores asignándoles responsabilidades y horas de dedicación. Además, la plataforma cuenta con un sistema de administración y control de permisos basado en políticas (*Policies*).
 
 La aplicación está desarrollada siguiendo la arquitectura MVC de Laravel, utilizando Blade para generar las vistas en el servidor (SSR).
 
 ## Funcionalidades
 
-La aplicación contempla las siguientes funcionalidades:
+La aplicación contempla las siguientes funcionalidades principales:
 
-- **Autenticación de usuarios:** registro, inicio de sesión y cierre de sesión.
-- **Gestión de proyectos:** creación, consulta, edición y eliminación de proyectos (CRUD).
-- **Gestión de colaboradores:** incorporación de usuarios a proyectos existentes.
-- **Asignación de roles:** posibilidad de definir el papel de cada colaborador dentro de un proyecto.
-- **Seguimiento de horas:** registro de las horas de contribución de los participantes.
-- **Control de permisos:** los propietarios de los proyectos pueden gestionar sus propios proyectos y colaboradores.
+- **Autenticación y gestión de perfil:** registro, inicio de sesión, cierre de sesión y modificación de datos de usuario (incluyendo actualización directa de correo electrónico sin verificación previa).
+- **Gestión de usuarios (Administración):** operaciones CRUD sobre usuarios restringidas exclusivamente a perfiles con rol de administrador (`is_admin`).
+- **Gestión de proyectos:** creación, consulta, edición y eliminación de proyectos (CRUD) con confirmaciones de seguridad mediante JavaScript antes del borrado.
+- **Gestión de equipos y colaboradores:** vista dedicada y controlador específico para incorporar o eliminar usuarios en proyectos existentes, visualizando los miembros desde la vista detalle de cada proyecto.
+- **Asignación de roles y horas:** posibilidad de definir el papel (`role`) y las horas de contribución (`contribution_hours`) de cada participante dentro del proyecto.
+- **Buscador avanzado:** filtrado dinámico de usuarios y búsqueda de proyectos por criterio y por estado del proyecto.
+- **Control de permisos (Policies):** autorización granular que devuelve errores `403 Forbidden` ante intentos de acceso o modificación no autorizados.
 
 ## Tecnologías utilizadas
 
@@ -31,15 +32,15 @@ La aplicación contempla las siguientes funcionalidades:
 | MySQL | Sistema gestor de bases de datos |
 | Eloquent ORM | Gestión de modelos y relaciones |
 | Laravel Sail | Entorno de desarrollo con Docker |
-| JavaScript | Interactividad en el cliente |
-| Vite | Gestión de recursos frontend |
-| CSS | Estilos de la interfaz |
+| JavaScript | Interactividad y confirmaciones de borrado en cliente |
+| Vite | Gestión y compilación de recursos frontend |
+| CSS | Estilos personalizados e identidad visual de la interfaz |
 
 ## Modelo de datos
 
 La aplicación utiliza las siguientes entidades principales:
 
-- **Users:** almacena la información de los usuarios registrados.
+- **Users:** almacena la información de los usuarios registrados, incluyendo el campo booleano `is_admin` para distinguir a los administradores de los usuarios estándar.
 - **Projects:** almacena los proyectos, incluyendo su título, descripción, fecha límite, estado y propietario.
 - **Project_User:** tabla intermedia que establece la relación muchos a muchos entre usuarios y proyectos.
 
@@ -68,8 +69,8 @@ La tabla intermedia `project_user` incorpora información adicional sobre cada p
 ### 1. Clonar el repositorio
 
 ```bash
-git clone <URL_DEL_REPOSITORIO>
-cd PRACTICA-LARAVEL
+git clone https://github.com/TheSilentCoder99/Plataforma-proyectos-colaborativos.git
+cd Plataforma-proyectos-colaborativos
 ```
 
 ### 2. Instalar dependencias PHP
@@ -100,16 +101,12 @@ Configurar las variables de conexión a la base de datos según el servicio defi
 ./vendor/bin/sail artisan key:generate
 ```
 
-### 6. Ejecutar las migraciones
+### 6. Ejecutar las migraciones y seeders
+
+Para crear las tablas y poblar la base de datos con los factories y usuarios de prueba por defecto (administrador y usuario estándar):
 
 ```bash
-./vendor/bin/sail artisan migrate
-```
-
-Si el proyecto dispone de seeders para generar datos de prueba:
-
-```bash
-./vendor/bin/sail artisan db:seed
+./vendor/bin/sail artisan migrate --seed
 ```
 
 ### 7. Instalar dependencias frontend
@@ -144,35 +141,44 @@ Para detener los contenedores:
 ./vendor/bin/sail down
 ```
 
+## Usuarios de prueba (Seeders)
+
+Al ejecutar las migraciones con `--seed`, el sistema genera datos iniciales mediante *Factories* y crea dos cuentas por defecto para facilitar las pruebas de permisos y roles:
+
+- **Usuario Administrador (`is_admin = true`):** con acceso completo a la gestión CRUD de todos los usuarios y supervisión de la plataforma.
+- **Usuario Estándar (`is_admin = false`):** para validar las restricciones de acceso (`403`) y el flujo normal de creación de proyectos y colaboración en equipos.
+
+*(Consultar `database/seeders/DatabaseSeeder.php` para ver las credenciales exactas configuradas).*
+
 ## Estructura del proyecto
 
 La aplicación sigue la estructura convencional de Laravel:
 
 ```text
-PRACTICA-LARAVEL/
+Plataforma-proyectos-colaborativos/
 │
 ├── app/
 │   ├── Http/
-│   │   ├── Controllers/
+│   │   ├── Controllers/   # Controladores de Proyectos, Usuarios y Equipos
 │   │   └── Requests/
-│   ├── Models/
-│   └── Policies/
+│   ├── Models/            # Modelos User y Project con relaciones Eloquent
+│   └── Policies/          # Políticas de autorización (UserPolicy, ProjectPolicy)
 │
 ├── bootstrap/
 ├── config/
 ├── database/
-│   ├── migrations/
-│   ├── seeders/
-│   └── factories/
+│   ├── factories/         # Factories para generación de proyectos y usuarios
+│   ├── migrations/        # Migraciones (users, is_admin, projects, project_user)
+│   └── seeders/           # Seeders con usuarios de prueba y datos iniciales
 │
 ├── public/
 ├── resources/
-│   ├── css/
-│   ├── js/
-│   └── views/
+│   ├── css/               # Estilos personalizados y logotipo
+│   ├── js/                # Scripts de confirmación de acciones
+│   └── views/             # Vistas Blade (proyectos, usuarios, equipos)
 │
 ├── routes/
-│   └── web.php
+│   └── web.php            # Definición organizada de rutas web
 │
 ├── storage/
 ├── tests/
@@ -182,22 +188,23 @@ PRACTICA-LARAVEL/
 └── README.md
 ```
 
-*La estructura mostrada es orientativa y puede variar según la organización definitiva del código.*
-
 ## Seguridad
 
 La aplicación contempla diferentes mecanismos de seguridad:
 
-- Autenticación para proteger las funcionalidades privadas.
-- Autorización para limitar las operaciones de gestión de proyectos a sus propietarios.
-- Validación de los datos recibidos mediante las herramientas de Laravel.
-- Protección CSRF en los formularios.
-- Uso del sistema de relaciones de Eloquent para gestionar la integridad de los datos.
+- **Autenticación:** protección de rutas y funcionalidades privadas mediante middleware de sesión.
+- **Autorización basada en Policies:**
+  - Solo los usuarios con rol administrador (`is_admin`) pueden realizar operaciones CRUD sobre otros usuarios.
+  - Solo los propietarios de un proyecto pueden editarlo, eliminarlo o gestionar su equipo de colaboradores.
+  - Respuesta HTTP `403 Forbidden` ante cualquier intento de acción no autorizada.
+- **Validación y protección de formularios:** validación de datos en el servidor y protección CSRF activa en todos los formularios.
+- **Integridad referencial:** uso de relaciones Eloquent y claves foráneas en las migraciones.
 
 ## Autor
 
 Proyecto desarrollado individualmente como parte del módulo de Desarrollo Web en Entorno Servidor (DWES).
 
+**Desarrollador:** Alan Sepúlveda (`TheSilentCoder99`)  
 **Ciclo formativo:** Desarrollo de Aplicaciones Web (DAW)  
 **Centro educativo:** IES Celia Viñas  
 **Curso académico:** 2026/2027
